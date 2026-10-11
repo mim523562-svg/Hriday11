@@ -1,104 +1,134 @@
+const fs = global.nodemodule["fs-extra"];
+const axios = global.nodemodule["axios"];
+
 module.exports.config = {
   name: "info",
-  version: "1.3.0",
+  version: "2.0.0",
   hasPermssion: 0,
-  credits: "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
-  description: "Bot information command",
+  credits: "💠 HRIDOY HASAN SHANTO 💠",
+  description: "Stylish Bot Information System",
   commandCategory: "For users",
-  hide: true,
+  hide: false,
   usages: "",
-  cooldowns: 5,
+  cooldowns: 5
 };
 
-module.exports.run = async function ({ api, event, args, Users, Threads }) {
-  const { threadID } = event;
-  const request = global.nodemodule["request"];
-  const fs = global.nodemodule["fs-extra"];
+module.exports.run = async function ({
+  api,
+  event,
+  Threads
+}) {
+  const { threadID, messageID } = event;
 
-  const { configPath } = global.client;
-  delete require.cache[require.resolve(configPath)];
-  const config = require(configPath);
+  try {
+    const { configPath } = global.client;
+    delete require.cache[require.resolve(configPath)];
+    const config = require(configPath);
 
-  const { commands } = global.client;
-  const threadSetting = (await Threads.getData(String(threadID))).data || {};
-  const prefix = threadSetting.hasOwnProperty("PREFIX")
-    ? threadSetting.PREFIX
-    : config.PREFIX;
+    const commands = global.client.commands;
+    const threadData = await Threads.getData(String(threadID));
+    const threadSetting = threadData.data || {};
 
-  const uptime = process.uptime();
-  const hours = Math.floor(uptime / 3600);
-  const minutes = Math.floor((uptime % 3600) / 60);
-  const seconds = Math.floor(uptime % 60);
+    const prefix = threadSetting.PREFIX || config.PREFIX || ".";
 
-  const totalUsers = global.data.allUserID.length;
-  const totalThreads = global.data.allThreadID.length;
+    const uptime = Math.floor(process.uptime());
+    const days = Math.floor(uptime / 86400);
+    const hours = Math.floor((uptime % 86400) / 3600);
+    const minutes = Math.floor((uptime % 3600) / 60);
+    const seconds = uptime % 60;
 
-  const msg = `
-╔══════════════════════╗
-   🤖 𝐁𝐎𝐓 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 🤖
-╚══════════════════════╝
+    const totalUsers =
+      global.data.allUserID?.length || 0;
 
-┌──────────────────────
-│ 🏷️ 𝗕𝗼𝘁 𝗡𝗮𝗺𝗲    :  𝐑𝐈𝐘𝐀
-│ ⚡ 𝗣𝗿𝗲𝗳𝗶𝘅      :  ${config.PREFIX}
-│ 📌 𝗕𝗼𝘅 𝗣𝗿𝗲𝗳𝗶𝘅  :  ${prefix}
-│ 🧩 𝗠𝗼𝗱𝘂𝗹𝗲𝘀     :  ${commands.size}
-│ 📡 𝗣𝗶𝗻𝗴        :  ${Date.now() - event.timestamp}ms
-└──────────────────────
+    const totalThreads =
+      global.data.allThreadID?.length || 0;
 
-╔══════════════════════╗
-   👑 𝐎𝐖𝐍𝐄𝐑 𝐈𝐍𝐅𝐎 👑
-╚══════════════════════╝
+    const ping = Date.now() - (event.timestamp || Date.now());
 
-┌──────────────────────
-│ 💎 𝗡𝗮𝗺𝗲     :  乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐
-│ 🌐 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸 :  fb.com/mrjuwel444
-│ 💬 𝗠𝗲𝘀𝘀𝗲𝗻𝗴𝗲𝗿:  m.me/mrjuwel444
-│ 📱 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽 :  +8801943488192
-└──────────────────────
+    const botName = config.BOTNAME || "HRIDOY BOT V2";
+    const ownerName = "হৃদয় হাসান শান্ত";
+    const facebook =
+      "https://www.facebook.com/share/1DQCCDQ1iV/";
 
-╔══════════════════════╗
-   📊 𝐀𝐂𝐓𝐈𝐕𝐈𝐓𝐈𝐄𝐒 📊
-╚══════════════════════╝
+    const msg = `
+╭━━━〔 💠 HRIDOY BOT 💠 〕━━━╮
+┃
+┃  💖 ${botName}
+┃  ✨ স্বাগতম আমার বট সিস্টেমে!
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ 🤖 BOT INFORMATION
+┣━━━━━━━━━━━━━━━━━━
+┃
+┃ 💠 Bot Name : ${botName}
+┃ ⚡ Prefix   : ${config.PREFIX || "."}
+┃ 📌 Box Prefix : ${prefix}
+┃ 🧩 Commands : ${commands.size}
+┃ 📡 Ping     : ${ping} ms
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ 👑 OWNER INFORMATION
+┣━━━━━━━━━━━━━━━━━━
+┃
+┃ 💎 Name : ${ownerName}
+┃ 🌐 Facebook:
+┃ ${facebook}
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ 📊 BOT STATISTICS
+┣━━━━━━━━━━━━━━━━━━
+┃
+┃ ⏱️ Uptime :
+┃ ${days}d ${hours}h ${minutes}m ${seconds}s
+┃
+┃ 👥 Total Users : ${totalUsers}
+┃ 💬 Total Groups: ${totalThreads}
+┃ 🆔 Thread ID   : ${threadID}
+┃
+╰━━━━━━━━━━━━━━━━━━
+   💫 THANKS FOR USING 💫
 
-┌──────────────────────
-│ ⏱️ 𝗔𝗰𝘁𝗶𝘃𝗲 𝗧𝗶𝗺𝗲 :  ${hours}h ${minutes}m ${seconds}s
-│ 👥 𝗚𝗿𝗼𝘂𝗽𝘀      :  ${totalThreads}
-│ 🧿 𝗧𝗼𝘁𝗮𝗹 𝗨𝘀𝗲𝗿𝘀:  ${totalUsers}
-└──────────────────────
+     💠 HRIDOY BOT V2 💠
+    ⚙️ Powered by HRIDOY
+╰━━━━━━━━━━━━━━━━━━╯`;
 
-╭━━━━━━━━━━━━━━━━━━━━━╮
-   ❤️ 𝐓𝐡𝐚𝐧𝐤𝐬 𝐅𝐨𝐫 𝐔𝐬𝐢𝐧𝐠 ❤️
-      🌺 𝐑𝐈𝐘𝐀 𝐁𝐎𝐓 🌺
-╰━━━━━━━━━━━━━━━━━━━━━╯
+    const imageURL = "https://i.imgur.com/rNQJ9OA.jpeg";
+    const cacheDir = __dirname + "/cache";
 
-⚙️ 𝗣𝗼𝘄𝗲𝗿𝗲𝗱 𝗕𝘆 : 乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐
-`;
+    await fs.ensureDir(cacheDir);
 
-  const imgLinks = [
-    "https://i.imgur.com/HMtGAMO.jpeg",
-  ];
+    const imagePath = cacheDir + "/hriday-info.jpg";
 
-  const imgLink = imgLinks[Math.floor(Math.random() * imgLinks.length)];
-  const cachePath = __dirname + "/cache/info.jpg";
+    const response = await axios.get(imageURL, {
+      responseType: "arraybuffer",
+      timeout: 15000
+    });
 
-  const callback = () => {
-    api.sendMessage(
+    await fs.writeFile(imagePath, response.data);
+
+    return api.sendMessage(
       {
         body: msg,
-        attachment: fs.createReadStream(cachePath),
+        attachment: fs.createReadStream(imagePath)
       },
       threadID,
-      () => fs.unlinkSync(cachePath)
+      (err) => {
+        fs.unlink(imagePath).catch(() => {});
+
+        if (err) {
+          console.error("[INFO SEND ERROR]", err);
+        }
+      },
+      messageID
     );
-  };
+  } catch (error) {
+    console.error("[INFO COMMAND ERROR]", error);
 
-  return request(encodeURI(imgLink))
-    .pipe(fs.createWriteStream(cachePath))
-    .on("close", callback);
+    return api.sendMessage(
+      "❌ বটের তথ্য দেখাতে সমস্যা হয়েছে!\n💠 কিছুক্ষণ পর আবার চেষ্টা করো।",
+      threadID,
+      null,
+      messageID
+    );
+  }
 };
-
-// 🔒 Credits Protection
-if (module.exports.config.credits !== "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐") {
-  throw new Error("⚠️ Credits পরিবর্তন করা হয়েছে! অনুগ্রহ করে আসল ক্রেডিট ব্যবহার করুন।");
-}
