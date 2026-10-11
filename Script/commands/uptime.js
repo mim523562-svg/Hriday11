@@ -1,77 +1,106 @@
-const os = require('os');
-const moment = require('moment-timezone');
-const startTime = new Date();
+const os = require("os");
+const moment = require("moment-timezone");
+
+const startTime = Date.now();
 
 module.exports = {
   config: {
     name: "uptime",
-    version: "2.0.0",
+    version: "3.0.0",
     hasPermssion: 0,
-    credits: "SHAHADAT SAHU",
-    description: "Show advanced system uptime.",
-    commandCategory: "system",
+    credits: "হৃদয় হাসান শান্ত",
+    description: "Advanced HRIDOY BOT system status",
+    commandCategory: "SYSTEM",
     usages: "uptime",
     prefix: false,
     cooldowns: 5
   },
 
   run: async function ({ api, event }) {
-    const { threadID } = event;
+    const { threadID, messageID } = event;
+    const pingStart = Date.now();
 
     try {
-      
-      const uptimeSec = (new Date() - startTime) / 1000;
+      const uptimeSec = Math.floor((Date.now() - startTime) / 1000);
+
       const days = Math.floor(uptimeSec / 86400);
       const hours = Math.floor((uptimeSec % 86400) / 3600);
       const minutes = Math.floor((uptimeSec % 3600) / 60);
-      const seconds = Math.floor(uptimeSec % 60);
-      const uptimeFormatted = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      const seconds = uptimeSec % 60;
+
+      const uptimeFormatted =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
       const totalMem = os.totalmem() / 1073741824;
       const freeMem = os.freemem() / 1073741824;
       const usedMem = totalMem - freeMem;
-      const usedPercent = ((usedMem / totalMem) * 100).toFixed(1);
-      const cpuModel = os.cpus()[0].model;
-      const cpuCount = os.cpus().length;
-      const cpuSpeed = os.cpus()[0].speed;
-      const now = moment.tz("Asia/Dhaka");
+      const usedPercent = (usedMem / totalMem) * 100;
+
+      const cpus = os.cpus();
+      const cpuModel = cpus[0]?.model || "Unknown";
+      const cpuCount = cpus.length;
+      const cpuSpeed = cpus[0]?.speed || 0;
+
+      const now = moment.tz("Asia/Kuala_Lumpur");
       const date = now.format("DD MMMM YYYY");
       const time = now.format("hh:mm:ss A");
-      const ping = Math.floor(Math.random() * 300);
+
+      const ping = Date.now() - pingStart;
 
       let pingStatus;
-      if (ping < 100) pingStatus = "⚡ Ultra Fast";
-      else if (ping < 200) pingStatus = "🚀 Stable";
-      else if (ping < 400) pingStatus = "⚠️ Normal";
-      else pingStatus = "🐢 Slow";
+      if (ping < 100) pingStatus = "⚡ FAST";
+      else if (ping < 250) pingStatus = "🚀 STABLE";
+      else pingStatus = "⚠️ SLOW";
 
-      
-      const status = usedPercent < 70 ? "✅ SYSTEM STABLE" : usedPercent < 90 ? "⚠️ HIGH LOAD" : "⛔ CRITICAL";
+      let status;
+      if (usedPercent < 70) {
+        status = "✅ SYSTEM STABLE";
+      } else if (usedPercent < 90) {
+        status = "⚠️ HIGH LOAD";
+      } else {
+        status = "⛔ CRITICAL";
+      }
+
       const finalMsg = `
-╭───〔⚙️ SYSTEM STATUS ⚙️〕───╮
-│ 👑 𝗢𝗪𝗡𝗘𝗥:⎯꯭𓆩꯭𝆺𝅥😻⃞𝐌⃞𝆠፝֟𝐑᭄ღ倫 𝐉⃞𝐔⃞𝐖⃞𝐄⃞𝐋༢࿐ 
-│ 🤖 𝗕𝗢𝗧: ⎯꯭𓆩꯭𝆺𝅥😻⃞𝐑⃞𝐈⃞𝐘⃞𝐀⃞༢࿐
-│ 🕐 𝗦𝗧𝗔𝗥𝗧 𝗧𝗜𝗠𝗘: ${startTime.toLocaleString()}
-│ ⏰ 𝗨𝗣𝗧𝗜𝗠𝗘: ${uptimeFormatted}
-├───────────────────────
-│ 💻 𝗢𝗦: ${os.type()} ${os.arch()}
-│ 🧠 𝗖𝗣𝗨: ${cpuModel}
-│ 🔢 𝗖𝗢𝗥𝗘𝗦: ${cpuCount}
-│ ⚙️ 𝗦𝗣𝗘𝗘𝗗: ${cpuSpeed} MHz
-│ 💾 𝗥𝗔𝗠: ${usedMem.toFixed(2)} GB / ${totalMem.toFixed(2)} GB (${usedPercent}%)
-│ 🧩 𝗡𝗢𝗗𝗘: ${process.version}
-├───────────────────────
-│ 📅 𝗗𝗔𝗧𝗘: ${date}
-│ ⏰ 𝗧𝗜𝗠𝗘: ${time}
-│ 📡 𝗣𝗜𝗡𝗚: ${ping}ms (${pingStatus})
-│ 🧭 𝗦𝗧𝗔𝗧𝗨𝗦: ${status}
-╰───────────────────────
+╭━━━〔 💠 HRIDOY BOT V3 💠 〕━━━╮
+┃
+┃ 👑 OWNER : হৃদয় হাসান শান্ত
+┃ 🤖 BOT : HRIDOY BOT
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ ⏱️ UPTIME
+┃ ${uptimeFormatted}
+┃
+┃ 💻 OS : ${os.type()} ${os.arch()}
+┃ 🧠 CPU : ${cpuModel}
+┃ 🔢 CORES : ${cpuCount}
+┃ ⚙️ SPEED : ${cpuSpeed} MHz
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ 💾 RAM : ${usedMem.toFixed(2)} GB
+┃ 📦 TOTAL : ${totalMem.toFixed(2)} GB
+┃ 📊 USAGE : ${usedPercent.toFixed(1)}%
+┃ 🧩 NODE : ${process.version}
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ 📅 DATE : ${date}
+┃ 🕒 TIME : ${time}
+┃ 📡 ELAPSED : ${ping} ms
+┃ 🚦 PING STATUS : ${pingStatus}
+┃ 🛡️ STATUS : ${status}
+┃
+╰━━━〔 💠 HRIDOY SYSTEM 💠 〕━━━╯
 `;
 
-      await api.sendMessage(finalMsg, threadID);
+      return api.sendMessage(finalMsg, threadID, messageID);
 
     } catch (error) {
-      console.error("Uptime command error:", error);
-      await api.sendMessage("call admin sahu", event.threadID);
+      console.error("HRIDOY Uptime Error:", error);
+      return api.sendMessage(
+        "❌ Uptime command error! Please check the bot logs.",
+        threadID,
+        messageID
+      );
     }
   }
 };
