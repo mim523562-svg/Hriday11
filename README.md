@@ -1,18 +1,17 @@
-# ─⃞𝐉𝐔𝐖𝐄𝐋-𝐂𝐇𝐀𝐓-𝐁𝐎𝐓🪽
+# Šħẫňto Hřiȡẫy Ħẫššẫň🪽
 ### ⚡ Ultra Premium Messenger Automation System
 
 ---
-
 <!-- HERO ANIMATION -->
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=24&duration=2500&pause=1000&color=00A8FF&center=true&vCenter=true&width=650&lines=Welcome+To+JUWEL+CHAT+BOT;Advanced+Messenger+Automation+System;Fast+%7C+Smart+%7C+Secure+%7C+Stable" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=24&duration=2500&pause=1000&color=00A8FF&center=true&vCenter=true&width=650&lines=Welcome+To+HRIDOY+HASAN+SHANTO+CHAT+BOT;Advanced+Messenger+Automation+System;Fast+%7C+Smart+%7C+Secure+%7C+Stable" alt="HRIDOY HASAN SHANTO CHAT BOT" />
 </p>
 
 ---
 
 <!-- BANNER -->
 <p align="center">
-  <img src="https://files.catbox.moe/fu54e0.jpg" width="85%" />
+  <img src="https://i.imgur.com/rNQJ9OA.jpeg" width="85%" />
 </p>
 
 ---
@@ -116,7 +115,7 @@ _______
 
 ### <br>   ❖ DEPLOY_WORKFLOWS ❖
 ```
-name: Juwel.js CI
+name: Šħẫňto Hřiȡẫy Ħẫššẫň.js CI
 
 on:
   push:
@@ -168,7 +167,7 @@ Click the image above to watch the step-by-step tutorial on YouTube.
 **Start Command**  
    Navigate to the folder where your bot files are located:
    ```bash
-   node Juwel.js
+   node Šħẫňto Hřiȡẫy Ħẫššẫňl.js
 ```
 
 
@@ -249,14 +248,14 @@ ___
 
 ## 👨‍💻 **ABOUT THE DEVELOPER**  
   
-**Name:** **`JUWEL ISLAM`**  
-**Nice Name:** **`MR JUWEL`**  
+**Name:** **`Šħẫňto Hřiȡẫy Ħẫššẫň**  
+**Nice Name:** **`Šħẫňto Hřiȡẫy Ħẫššẫň`**  
 **Profession:** **`STUDENT`**  
 **Location:** **`RANGPUR, BANGLADESH`**  
 
 ### 📞 **CONTACT INFORMATION**  
 - **WhatsApp:** **[+8801943488192](+8801943488192)**  
-- **Facebook:** **[Facebook ID](fb.com/mrjuwel520)**  
+- **Facebook:** **[Facebook ID](https://www.facebook.com/share/1GhojzTrpj/)**  
 - **Messenger:** **[Message Me](mrjuwel520)**  
 
 ### 🚀 **DEVELOPMENT APPROACH**  
@@ -278,7 +277,7 @@ If you need any help, you can contact the admin.
 Please do not disturb the admin unless you have a special need. Thank you! 
 
 <p align="center">
-  <a href="https://wa.me/+8801943488192?text=Assalamualaikum%20Admin%20MR%20JUWEL%20Need%20Help%20Please%20Brother%20🫶">
+  <a href="https://www.facebook.com/share/1GhojzTrpj/">
     <img alt="WhatsApp" src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">
   </a>
   <a href="https://m.me/61592716197470">
@@ -297,9 +296,9 @@ Please do not disturb the admin unless you have a special need. Thank you!
 ---
 
 <p align="center">
-  <a href="https://github.com/MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026.git"><img src="https://img.icons8.com/fluency/48/000000/github.png" alt="GitHub"></a>
-  <a href="https://wa.me/+8801943488192"><img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp"></a>
-  <a href="https://facebook.com/61592716197470"><img src="https://img.icons8.com/fluency/48/000000/facebook.png" alt="Facebook"></a>
+  <a href="https://www.facebook.com/share/1GhojzTrpj/"><img src="https://img.icons8.com/fluency/48/000000/github.png" alt="GitHub"></a>
+  <a href="https://www.facebook.com/share/1GhojzTrpj/"><img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp"></a>
+  <a href="https://www.facebook.com/share/1GhojzTrpj/"><img src="https://img.icons8.com/fluency/48/000000/facebook.png" alt="Facebook"></a>
   <a href="https://t.me/+7RqN73zA6aBiY2U1"><img src="https://img.icons8.com/color/48/000000/telegram-app.png" alt="Telegram"></a>
   <a href="https://youtube.com/@scb-community"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"></a>
 </p>
