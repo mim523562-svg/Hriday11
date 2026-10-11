@@ -39,8 +39,8 @@ module.exports.handleEvent = async ({ api, event, Threads }) => {
 
   if (body.startsWith("😅")) {
     const texts = [
-      "╭•┄┅════❁🌺❁════┅┄•╮\n⎯꯭𓆩꯭𝆺𝅥😻⃞𝐌⃞𝆠፝֟𝐑᭄ღ倫 𝐉⃞𝐔⃞𝐖⃞𝐄⃞𝐋༢࿐\n╰•┄┅════❁🌺❁════┅┄•╯",
-      "╭•┄┅════❁🎀❁════┅┄•╮\n⎯꯭𓆩꯭𝆺𝅥😻⃞𝐌⃞𝆠፝֟𝐑᭄ღ倫 𝐉⃞𝐔⃞𝐖⃞𝐄⃞𝐋༢࿐\n╰•┄┅════❁🎀❁════┅┄•╯"
+      "╭•┄┅════❁🌺❁════┅┄•╮\n⎯꯭𓆩꯭😻𝆺𝅥Šħẫňto Hřiȡẫy Ħẫššẫň࿐\n╰•┄┅════❁🌺❁════┅┄•╯",
+      "╭•┄┅════❁🎀❁════┅┄•╮\n⎯꯭𓆩꯭𝆺𝅥😻⃞Šħẫňto Hřiȡẫy Ħẫššẫň࿐\n╰•┄┅════❁🎀❁════┅┄•╯"
     ];
 
     const randomText = texts[Math.floor(Math.random() * texts.length)];
