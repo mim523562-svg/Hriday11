@@ -1,128 +1,163 @@
+
 const fs = require("fs-extra");
 const axios = require("axios");
+const path = require("path");
 
 module.exports.config = {
   name: "helpall",
-  version: "3.0.0",
+  version: "5.0.0",
   hasPermssion: 0,
-  credits: "乛 MR ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
-  description: "Premium all command list with modern UI",
-  commandCategory: "system",
+  credits: "💗 HRIDOY HASAN SHANTO 💗",
+  description: "🎀 মেয়েরাই বট Premium Help Menu",
+  commandCategory: "System",
   usages: "[No args]",
   cooldowns: 5
 };
 
-// ✦ মোনোস্পেস বোল্ড ফন্ট (𝙰𝙱𝙲𝙳 স্টাইল)
-function toMonoBold(text) {
+const BOT_NAME = "মেয়েরাই বট";
+const OWNER = "HRIDOY HASAN SHANTO";
+const IMAGE_URL = "https://i.imgur.com/rNQJ9OA.jpeg";
+const DEFAULT_PREFIX = "!";
+
+// ✨ Stylish Font
+function fancy(text) {
   const map = {
-    'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴',
-    'F': '𝙵', 'G': '𝙶', 'H': '𝙷', 'I': '𝙸', 'J': '𝙹',
-    'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽', 'O': '𝙾',
-    'P': '𝙿', 'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃',
-    'U': '𝚄', 'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 'Y': '𝚈',
-    'Z': '𝚉',
-    'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎',
-    'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 'i': '𝚒', 'j': '𝚓',
-    'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘',
-    'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝',
-    'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢',
-    'z': '𝚣'
+    A:"𝘼",B:"𝘽",C:"𝘾",D:"𝘿",E:"𝙀",F:"𝙁",
+    G:"𝙂",H:"𝙃",I:"𝙄",J:"𝙅",K:"𝙆",L:"𝙇",
+    M:"𝙈",N:"𝙉",O:"𝙊",P:"𝙋",Q:"𝙌",R:"𝙍",
+    S:"𝙎",T:"𝙏",U:"𝙐",V:"𝙑",W:"𝙒",X:"𝙓",
+    Y:"𝙔",Z:"𝙕",
+    a:"𝙖",b:"𝙗",c:"𝙘",d:"𝙙",e:"𝙚",f:"𝙛",
+    g:"𝙜",h:"𝙝",i:"𝙞",j:"𝙟",k:"𝙠",l:"𝙡",
+    m:"𝙢",n:"𝙣",o:"𝙤",p:"𝙥",q:"𝙦",r:"𝙧",
+    s:"𝙨",t:"𝙩",u:"𝙪",v:"𝙫",w:"𝙬",x:"𝙭",
+    y:"𝙮",z:"𝙯",
+    "0":"𝟬","1":"𝟭","2":"𝟮","3":"𝟯","4":"𝟰",
+    "5":"𝟱","6":"𝟲","7":"𝟳","8":"𝟴","9":"𝟵"
   };
-  return text.split('').map(c => map[c] || c).join('');
+
+  return String(text).split("").map(c => map[c] || c).join("");
 }
 
-// ✦ সিরিয়াল নাম্বার (মোনোস্পেস স্টাইল)
-function toMonoNumber(num) {
-  const map = {
-    '0': '𝟶', '1': '𝟷', '2': '𝟸', '3': '𝟹', '4': '𝟺',
-    '5': '𝟻', '6': '𝟼', '7': '𝟽', '8': '𝟾', '9': '𝟿'
-  };
-  return num.toString().split('').map(d => map[d] || d).join('');
-}
-
-// 🔥 মেইন ফাংশন
-async function sendHelp(api, event) {
-  const { commands } = global.client;
-  const { threadID, messageID } = event;
-
-  const allCommands = [...commands.keys()]
-    .filter(cmd => cmd && cmd.trim() !== "")
-    .map(cmd => cmd.trim())
-    .sort();
-
-  const total = allCommands.length;
-
-  // 🔥 প্রতি লাইনে কমান্ড (২ কলাম গ্রিড লুক)
-  const commandList = allCommands.map((cmd, i) => {
-    const serial = toMonoNumber(i + 1);
-    const padded = serial.padStart(4, ' ');
-    const name = toMonoBold(cmd);
-    return `  ⟡ ${padded}  ▸  ${name}`;
-  }).join("\n");
-
-  const finalText = `
-╭━━━〔 ✦ 𝐇𝐄𝐋𝐏 𝐌𝐄𝐍𝐔 ✦ 〕━━━╮
-┃
-┃   ⌬ 𝐓𝐨𝐭𝐚𝐥 𝐂𝐨𝐦𝐦𝐚𝐧𝐝𝐬 : ${toMonoNumber(total)}
-┃   ⌬ 𝐏𝐫𝐞𝐟𝐢𝐱       : ${toMonoBold("!")}
-┃   ⌬ 𝐒𝐭𝐚𝐭𝐮𝐬       : ${toMonoBold("Online")}
-┃
-╰━━━━━━━━━━━━━━━━━━━━━━╯
-
-┏━━━━━━━━━━━━━━━━━━━━━━┓
-┃    ✿ 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐋𝐈𝐒𝐓 ✿     ┃
-┗━━━━━━━━━━━━━━━━━━━━━━┛
-${commandList}
-
-╭━━━━━━━━━━━━━━━━━━━━━━╮
-┃  ⚡ 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐁𝐲 ${toMonoBold("JUWEL")} ⚡  ┃
-╰━━━━━━━━━━━━━━━━━━━━━━╯
-`;
-
-  const imgPath = __dirname + "/cache/helpallbg.jpg";
-  const bg = "https://i.imgur.com/HMtGAMO.jpeg";
-
+// ⚙️ Prefix
+function getPrefix(threadID) {
   try {
-    const res = await axios({
-      url: encodeURI(bg),
-      method: "GET",
-      responseType: "stream",
-      headers: { "User-Agent": "Mozilla/5.0" }
-    });
+    const data = global.data?.threadData;
+    const settings = data
+      ? data.get(parseInt(threadID)) || {}
+      : {};
 
-    const writer = fs.createWriteStream(imgPath);
-    res.data.pipe(writer);
-
-    writer.on("finish", () => {
-      api.sendMessage(
-        {
-          body: finalText,
-          attachment: fs.createReadStream(imgPath)
-        },
-        threadID,
-        () => { try { fs.unlinkSync(imgPath); } catch (e) {} },
-        messageID
-      );
-    });
-
-    writer.on("error", () => {
-      api.sendMessage(finalText, threadID, messageID);
-    });
-
-  } catch (error) {
-    console.error("Error:", error);
-    api.sendMessage(finalText, threadID, messageID);
+    return settings.PREFIX || global.config?.PREFIX || DEFAULT_PREFIX;
+  } catch {
+    return DEFAULT_PREFIX;
   }
 }
 
-// 🔥 প্রিফিক্স কমান্ড
+// 🖼️ Download image
+async function downloadImage(filePath) {
+  await fs.ensureDir(path.dirname(filePath));
+
+  const response = await axios.get(IMAGE_URL, {
+    responseType: "arraybuffer",
+    timeout: 15000,
+    headers: { "User-Agent": "Mozilla/5.0" }
+  });
+
+  await fs.writeFile(filePath, response.data);
+}
+
+// 💌 Send Help Menu
+async function sendHelp(api, event) {
+  const { threadID, messageID } = event;
+  const commands = global.client?.commands;
+
+  if (!commands) {
+    return api.sendMessage(
+      "🥺 বটের কমান্ড লিস্ট পাওয়া যায়নি!",
+      threadID,
+      messageID
+    );
+  }
+
+  const prefix = getPrefix(threadID);
+  const allCommands = [...commands.keys()]
+    .filter(cmd => typeof cmd === "string" && cmd.trim())
+    .map(cmd => cmd.trim())
+    .sort((a, b) => a.localeCompare(b));
+
+  const total = allCommands.length;
+
+  if (!total) {
+    return api.sendMessage(
+      "🌸 এখনো কোনো কমান্ড পাওয়া যায়নি!",
+      threadID,
+      messageID
+    );
+  }
+
+  const commandList = allCommands.map((cmd, i) => {
+    return `┃ 💗 ${fancy(i + 1)}. ${fancy(cmd)}`;
+  }).join("\n");
+
+  const text = `
+╭━━━〔 🎀 ${BOT_NAME} 🎀 〕━━━╮
+┃
+┃      💕 ${fancy("WELCOME")} 💕
+┃
+┃  🌷 𝐁𝐎𝐓 : ${BOT_NAME}
+┃  👑 𝐎𝐖𝐍𝐄𝐑 : ${OWNER}
+┃  🟢 𝐒𝐓𝐀𝐓𝐔𝐒 : ${fancy("ONLINE")}
+┃  📚 𝐓𝐎𝐓𝐀𝐋 : ${fancy(total)} Commands
+┃  ⚙️ 𝐏𝐑𝐄𝐅𝐈𝐗 : ${fancy(prefix)}
+┃
+╰━━━━━━━━━━━━━━━━━━━━━━╯
+
+╭━━━〔 🌸 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐋𝐈𝐒𝐓 🌸 〕━━━╮
+${commandList}
+╰━━━━━━━━━━━━━━━━━━━━━━╯
+
+╭━━━〔 💌 𝐇𝐎𝐖 𝐓𝐎 𝐔𝐒𝐄 💌 〕━━━╮
+┃ 🎀 ${prefix}helpall
+┃ 🦋 ${prefix}allcmd
+┃ 🌹 ${prefix}help command
+╰━━━━━━━━━━━━━━━━━━━━━━╯
+
+╭━━━〔 💖 𝐂𝐑𝐄𝐃𝐈𝐓𝐒 💖 〕━━━╮
+┃ ✨ Developer: ${OWNER}
+┃ 🌷 Made with love
+┃ 🎀 Thanks for using ${BOT_NAME}
+╰━━━━━━━━━━━━━━━━━━━━━━╯
+
+       💗 𝑺𝑻𝑨𝒀 𝑪𝑼𝑻𝑬 💗
+`;
+
+  const imgPath = path.join(__dirname, "cache", "helpallbg.jpg");
+
+  try {
+    await downloadImage(imgPath);
+
+    return api.sendMessage({
+      body: text,
+      attachment: fs.createReadStream(imgPath)
+    }, threadID, err => {
+      if (err) console.error("[HELPALL]", err);
+      fs.unlink(imgPath).catch(() => {});
+    }, messageID);
+  } catch (error) {
+    console.error("[HELPALL IMAGE]", error.message);
+    return api.sendMessage(text, threadID, messageID);
+  }
+}
+
+// 🔥 Prefix command
 module.exports.run = async function ({ api, event }) {
   return sendHelp(api, event);
 };
 
-// 🔥 নো-প্রিফিক্স ট্রিগার
+// 💬 No-prefix trigger
 module.exports.handleEvent = async function ({ api, event }) {
-  const msg = (event.body || "").toLowerCase();
+  const msg = (event.body || "").trim().toLowerCase();
+
   if (msg === "helpall" || msg === "allcmd") {
     return sendHelp(api, event);
   }
