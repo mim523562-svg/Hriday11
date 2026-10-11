@@ -1,64 +1,93 @@
-const fs = require("fs");
 const axios = require("axios");
+const fs = require("fs-extra");
 const FormData = require("form-data");
-const { downloadFile } = require("../../utils/index");
+const path = require("path");
 
-module.exports.config = {
- name: "catbox",
- version: "1.0.0",
- hasPermssion: 0,
- credits: "ULLASH",
- description: "Upload media to Catbox",
- commandCategory: "media",
- usages: "[reply to image/video/audio]",
- cooldowns: 5
-};
+async function handleCatboxUpload({ event, api, message }) {
+  const { messageReply, messageID } = event;
 
-module.exports.run = async ({ api, event }) => {
- const { threadID, type, messageReply, messageID } = event;
+  if (!messageReply || !messageReply.attachments || messageReply.attachments.length === 0) {
+    return message.reply("⚠️ | Please reply to an image or video.");
+  }
 
- if (type !== "message_reply" || !messageReply.attachments || messageReply.attachments.length === 0) {
- return api.sendMessage("❐ Please reply to a photo/video/audio file.", threadID, messageID);
- }
+  const attachment = messageReply.attachments[0];
+  const fileUrl = attachment.url;
 
- const attachmentPaths = [];
+  // ✅ Detect extension properly
+  let ext = ".dat";
+  if (attachment.type === "photo") ext = ".jpg";
+  else if (attachment.type === "video") ext = ".mp4";
+  else if (attachment.type === "audio") ext = ".mp3";
 
- async function getAttachments(attachments) {
- let index = 0;
- for (const data of attachments) {
- const ext = data.type === "photo" ? "jpg" :
- data.type === "video" ? "mp4" :
- data.type === "audio" ? "mp3" :
- data.type === "animated_image" ? "gif" : "dat";
- const filePath = __dirname + `/cache/${index}.${ext}`;
- await downloadFile(data.url, filePath);
- attachmentPaths.push(filePath);
- index++;
- }
- }
+  // ✅ Unique file name (fix overwrite issue)
+  const filePath = path.join(__dirname, `temp_${Date.now()}${ext}`);
 
- await getAttachments(messageReply.attachments);
+  api.setMessageReaction("⏳", messageID, () => {}, true);
+  const loading = await message.reply("📤 Uploading to Catbox... Please wait!");
 
- let msg = "";
+  try {
+    // 📥 Download file
+    const response = await axios.get(fileUrl, { responseType: "stream" });
+    const writer = fs.createWriteStream(filePath);
+    response.data.pipe(writer);
 
- for (const filePath of attachmentPaths) {
- try {
- const form = new FormData();
- form.append("reqtype", "fileupload");
- form.append("fileToUpload", fs.createReadStream(filePath));
+    await new Promise((resolve, reject) => {
+      writer.on("finish", resolve);
+      writer.on("error", reject);
+    });
 
- const response = await axios.post("https://catbox.moe/user/api.php", form, {
- headers: form.getHeaders(),
- });
+    // 📤 Upload to Catbox
+    const form = new FormData();
+    form.append("reqtype", "fileupload");
+    form.append("fileToUpload", fs.createReadStream(filePath));
 
- msg += `${response.data.trim()}\n`;
- } catch (err) {
- console.error("Catbox upload failed:", err);
- msg += "❌ Upload failed for one file.\n";
- } finally {
- fs.unlinkSync(filePath);
- }
- }
+    const upload = await axios.post("https://catbox.moe/user/api.php", form, {
+      headers: form.getHeaders(),
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity
+    });
 
- return api.sendMessage(msg.trim(), threadID, messageID);
+    fs.unlinkSync(filePath);
+
+    api.setMessageReaction("✅", messageID, () => {}, true);
+
+    // ✅ Clean link output
+    const link = upload.data?.toString().trim();
+
+    return message.reply(`✅ | Upload Successful!\n🔗 ${link}`);
+
+  } catch (err) {
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+
+    api.setMessageReaction("❌", messageID, () => {}, true);
+
+    console.error(err.response?.data || err.message);
+
+    return message.reply("❌ | Upload failed! Try again later.");
+  } finally {
+    setTimeout(() => {
+      api.unsendMessage(loading.messageID);
+    }, 4000);
+  }
+}
+
+module.exports = {
+  config: {
+    name: "catbox",
+    aliases: ["ct"],
+    version: "2.0",
+    author: "Fixed by ChatGPT",
+    countDown: 5,
+    role: 0,
+    shortDescription: "Upload media to catbox",
+    longDescription: "Reply to image/video/audio to upload to catbox.moe",
+    category: "tools",
+    guide: {
+      en: "{pn} (reply to media)"
+    }
+  },
+
+  onStart: async function ({ event, api, message }) {
+    return handleCatboxUpload({ event, api, message });
+  }
 };
