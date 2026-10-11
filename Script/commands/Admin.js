@@ -1,1 +1,104 @@
-const _0xe59828=_0x3a15;function _0x472e(){const _0x3bd873=['279867aJFVCX','request','14LhBCfO','83833lZcjHO','createReadStream','7082584kgUVVW','config','trim','11MUycLV','threadID','1734912gnoudu','exports','https://i.imgur.com/C7JxBBW.jpeg','MR\x20JUWEL','DD/MM/YYYY\x20hh:mm:ss\x20A','9sHQRQa','\x0a┃\x0a┗━━━━━━━━━━━━━━━┛\x0a\x20\x20\x20\x20\x20\x20\x20\x20','11120AlunZa','close','1492188pxOdXL','toLowerCase','Show\x20Owner\x20Info','19068090InILix','2460mnHWyU','run','/cache','existsSync'];_0x472e=function(){return _0x3bd873;};return _0x472e();}(function(_0x2da069,_0x24438c){const _0x10941b=_0x3a15,_0x15f1b0=_0x2da069();while(!![]){try{const _0x2dca89=parseInt(_0x10941b(0x86))/0x1*(-parseInt(_0x10941b(0x85))/0x2)+parseInt(_0x10941b(0x7b))/0x3+parseInt(_0x10941b(0x8d))/0x4+-parseInt(_0x10941b(0x79))/0x5*(parseInt(_0x10941b(0x7f))/0x6)+parseInt(_0x10941b(0x83))/0x7+-parseInt(_0x10941b(0x88))/0x8*(parseInt(_0x10941b(0x77))/0x9)+-parseInt(_0x10941b(0x7e))/0xa*(-parseInt(_0x10941b(0x8b))/0xb);if(_0x2dca89===_0x24438c)break;else _0x15f1b0['push'](_0x15f1b0['shift']());}catch(_0x382139){_0x15f1b0['push'](_0x15f1b0['shift']());}}}(_0x472e,0x78960));function _0x3a15(_0x5123df,_0x83545c){_0x5123df=_0x5123df-0x77;const _0x472e70=_0x472e();let _0x3a152c=_0x472e70[_0x5123df];return _0x3a152c;}const request=require(_0xe59828(0x84)),fs=require('fs-extra'),moment=require('moment-timezone');module[_0xe59828(0x8e)][_0xe59828(0x89)]={'name':'admin','version':'1.0.0','hasPermssion':0x0,'credits':_0xe59828(0x90),'description':_0xe59828(0x7d),'commandCategory':'noprefix','usages':'','cooldowns':0x5},module[_0xe59828(0x8e)]['handleEvent']=async function({api:_0x4c9757,event:_0x525c01}){const _0x50bb4d=_0xe59828;if(!_0x525c01['body'])return;const _0x3569ba=_0x525c01['body'][_0x50bb4d(0x7c)]()[_0x50bb4d(0x8a)]();if(_0x3569ba==='admin')return module['exports'][_0x50bb4d(0x80)]({'api':_0x4c9757,'event':_0x525c01});},module['exports']['run']=async function({api:_0x385f06,event:_0x226f74}){const _0x513984=_0xe59828;var _0x345c56=moment()['tz']('Asia/Dhaka')['format'](_0x513984(0x91));!fs[_0x513984(0x82)](__dirname+_0x513984(0x81))&&fs['mkdirSync'](__dirname+_0x513984(0x81));var _0x18d1f3=()=>_0x385f06['sendMessage']({'body':'\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃—͟͟͞͞─⃞⤹🩷ꤪ🅐🅓🅜🅘🅝⤸⃞🩷ꤪꜛ國🪽\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃👤\x20𝐍𝐚𝐦𝐞\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20〲\x20𝐉𝆠፝֟𝐔𝆠፝֟𝐖𝆠፝֟𝐄𝆠፝֟𝐋\x20\x0a┃\x20\x20\x20\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃𝐍𝐢𝐜𝐤\x20𝐍𝐚𝐦𝐞〲𝐌𝆠፝֟𝐑\x20𝐉𝆠፝֟𝐔𝆠፝֟𝐖𝆠፝֟𝐄𝆠፝֟𝐋\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃\x20🚹\x20𝐆𝐞𝐧𝐝𝐞𝐫\x20\x20\x20\x20\x20\x20〲\x20𝐌𝐀𝐋𝐄\x20\x20\x0a┃\x20\x20\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃\x20😈𝐀𝐓𝐓𝐈𝐓𝐔𝐃𝐄\x20〲𝐊𝐈𝐍𝐆\x20\x20\x20\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🎮𝐅𝐑𝐄𝐄\x20𝐅𝐈𝐑𝐄〲𝐋𝐎𝐕𝐄𝐑\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🎓𝐏𝐑𝐀𝐒𝐔𝐍𝐀〲𝐎𝐅𝐅\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃💰𝐖𝐨𝐫𝐤〲𝐂𝐎𝐍𝐓𝐑𝐀𝐂𝐓𝐈𝐎𝐍\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃❤️\x20𝐑𝐞𝐥𝐚𝐭𝐢𝐨𝐧\x20\x20〲𝐒𝐈𝐍𝐆𝐄𝐋\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🎂\x20𝐀𝐠𝐞\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20〲𝟐𝟐+\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🎂𝐁𝐢𝐫𝐭𝐡𝐝𝐚𝐲\x20〲𝐀𝐏𝐑𝐈𝐋\x20𝟐𝟒\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃\x20🩸𝐁𝐥𝐨𝐝\x20\x20\x20\x20\x20\x20\x20\x20〲𝐀+\x20\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃\x20🙆‍♂️𝐇𝐈𝐆𝐇𝐓〲𝟓\x22𝟔\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🧍𝐖𝐈𝐈𝐓〲𝟓𝟒+\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃\x20🕌\x20𝐑𝐞𝐥𝐢𝐠𝐢𝐨𝐧\x20〲𝐈𝐒𝐋𝐀𝐌\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃\x20🏡\x20𝐀𝐝𝐝𝐫𝐞𝐬𝐬〲𝐑𝐀𝐍𝐆𝐏𝐔𝐑\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🌐𝐌𝐞𝐬𝐬𝐞𝐧𝐠𝐞𝐫\x20❯\x20mrjuwel999\x0a┃\x20\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🌐\x20𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤❯\x20fb.com/mrjuwel999\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🌐𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩❯\x20+8801943488192\x0a┃\x20\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🌐𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌❯\x20mrjuwel_2025\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🌐\x20𝐓𝐢𝐤𝐭𝐨𝐤❯\x20mrjuwel2025\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🌐\x20𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦❯\x20mrjuwel2025\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃🌐\x20𝐄𝐦𝐚𝐢𝐥❯\x20mrjuwel315@gmail.com\x20\x0a┃\x0a┣━━━━━━━━━━━━━━━┫\x0a┃\x0a┃\x20🕒\x20𝐔𝐩𝐝𝐚𝐭𝐞𝐝\x20𝐓𝐢𝐦𝐞:\x20\x20'+_0x345c56+_0x513984(0x78),'attachment':fs[_0x513984(0x87)](__dirname+'/cache/1.png')},_0x226f74[_0x513984(0x8c)],()=>fs['unlinkSync'](__dirname+'/cache/1.png'));const _0x26a25f=_0x513984(0x8f);return request(encodeURI(_0x26a25f))['pipe'](fs['createWriteStream'](__dirname+'/cache/1.png'))['on'](_0x513984(0x7a),()=>_0x18d1f3());};
+const fs = require("fs-extra");
+const axios = require("axios");
+const moment = require("moment-timezone");
+
+module.exports.config = {
+  name: "admin",
+  version: "2.0.0",
+  hasPermssion: 0,
+  credits: "💠 HRIDOY HASAN SHANTO 💠",
+  description: "Display Owner Profile",
+  commandCategory: "Information",
+  usages: "",
+  cooldowns: 5
+};
+
+const IMAGE_URL = "https://i.imgur.com/rNQJ9OA.jpeg";
+const FACEBOOK = "https://www.facebook.com/share/1DQCCDQ1iV/";
+
+module.exports.handleEvent = async function ({ api, event }) {
+  if (!event.body) return;
+
+  if (event.body.trim().toLowerCase() === "admin") {
+    return module.exports.run({ api, event });
+  }
+};
+
+module.exports.run = async function ({ api, event }) {
+  const { threadID, messageID } = event;
+  const cacheDir = __dirname + "/cache";
+  const imagePath = cacheDir + "/hriday-admin.jpg";
+
+  const updatedTime = moment()
+    .tz("Asia/Kuala_Lumpur")
+    .format("DD/MM/YYYY hh:mm:ss A");
+
+  const msg = `
+╭━━━〔 💠 ADMIN PROFILE 💠 〕━━━╮
+┃
+┃ 👑 𝐍𝐀𝐌𝐄 : হৃদয় হাসান শান্ত
+┃ 💎 𝐍𝐈𝐂𝐊𝐍𝐀𝐌𝐄 : শান্ত ভাই
+┃ 🚹 𝐆𝐄𝐍𝐃𝐄𝐑 : Male
+┃ 😎 𝐀𝐓𝐓𝐈𝐓𝐔𝐃𝐄 : নিজের মতো চলি
+┃ 🎮 𝐆𝐀𝐌𝐈𝐍𝐆 : Game Lover
+┃ 💼 𝐏𝐑𝐎𝐅𝐄𝐒𝐒𝐈𝐎𝐍 : প্রবাসী জীবন
+┃ ❤️ 𝐑𝐄𝐋𝐀𝐓𝐈𝐎𝐍 : Single Boy
+┃ 🎂 𝐀𝐆𝐄 : 21+
+┃ 🏡 𝐇𝐎𝐌𝐄 : বগুড়া, বাংলাদেশ 🇧🇩
+┃ 🌏 𝐂𝐔𝐑𝐑𝐄𝐍𝐓 : Malaysia 🇲🇾
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ 🌐 𝐒𝐎𝐂𝐈𝐀𝐋 𝐌𝐄𝐃𝐈𝐀
+┣━━━━━━━━━━━━━━━━━━
+┃ 📘 Facebook:
+┃ ${FACEBOOK}
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ 💫 𝐌𝐘 𝐒𝐓𝐀𝐓𝐔𝐒
+┣━━━━━━━━━━━━━━━━━━
+┃ 👑 নিজের গল্পের নায়ক নিজেই
+┃ 🤫 কম কথা, বেশি কাজ
+┃ 💖 সম্মান দিলে সম্মান পাবে
+┃
+┣━━━━━━━━━━━━━━━━━━
+┃ 🕒 UPDATED INFORMATION
+┣━━━━━━━━━━━━━━━━━━
+┃ ${updatedTime}
+┃
+╰━━━〔 💠 HRIDOY BOT 💠 〕━━━╯
+       💖 POWERED BY HRIDOY
+`;
+
+  try {
+    await fs.ensureDir(cacheDir);
+
+    const response = await axios.get(IMAGE_URL, {
+      responseType: "arraybuffer",
+      timeout: 15000
+    });
+
+    await fs.writeFile(imagePath, response.data);
+
+    return api.sendMessage(
+      {
+        body: msg,
+        attachment: fs.createReadStream(imagePath)
+      },
+      threadID,
+      err => {
+        fs.unlink(imagePath).catch(() => {});
+        if (err) console.error("[ADMIN SEND ERROR]", err);
+      },
+      messageID
+    );
+  } catch (error) {
+    console.error("[ADMIN ERROR]", error);
+
+    return api.sendMessage(
+      msg,
+      threadID,
+      null,
+      messageID
+    );
+  }
+};
