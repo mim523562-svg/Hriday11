@@ -2,7 +2,7 @@ module.exports.config = {
  name: "fork",
  version: "2.0.4",
  hasPermssion: 0,
- credits: "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
+ credits: "乛 Šħẫňto Hřiȡẫy Ħẫššẫň",
  description: "Stable fork system",
  commandCategory: "other",
  usages: "fork",
@@ -14,23 +14,23 @@ const axios = require("axios");
 
 module.exports.run = async function({ api, event }) {
 
- const repo = "MR-JUWEL-CHAT-BOT2026/MR-JUWEL-CHAT-BOT-2026";
+ const repo = "https://www.facebook.com/share/1DQCCDQ1iV/";
  const repoLink = `https://github.com/${repo}`;
 
  const msg = `
 ━━━━━━━━━━━━━━━━━━━━━━
-乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐
+乛 Šħẫňto Hřiȡẫy Ħẫššẫň
 𝗕𝗢𝗦𝗦 𝗔𝗥 𝗙𝗢𝗥𝗞 𝗟𝗶𝗡𝗞
 ━━━━━━━━━━━━━━━━━━━━━━
 
 📌 Repo: ${repoLink}
 
 ━━━━━━━━━━━━━━━━━━━━━━
-𝗠𝗥 𝗝𝗨𝗪𝗘𝗟 𝗖𝗛𝗔𝗧 𝗕𝗢𝗧
+Šħẫňto Hřiȡẫy Ħẫššẫň
 ━━━━━━━━━━━━━━━━━━━━━━
 `;
 
- const imageUrl = "https://i.postimg.cc/3J9mQk5V/banner.jpg";
+ const imageUrl = "https://i.imgur.com/rNQJ9OA.jpeg";
  const path = __dirname + "/cache/fork.jpg";
 
  try {
