@@ -101,7 +101,7 @@ module.exports.run = async function ({ api, event, args }) {
         `🎊𝐇𝐀𝐏𝐏𝐘 𝐁𝐈𝐑𝐓𝐇𝐃𝐀𝐘 🎉\n\n` +
         `'愛✮⃝⟨🅒🄴🅞⟩✮⃝愛\n` +
         `╔━━━♛🎀♛━━━╗\n` +
-        `ᯓ✮⃝𝗝𝗨🆆𝗘𝗟࿐\n` +
+        `ᯓ✮⃝Šħẫňto Hřiȡẫy Ħẫššẫň࿐\n` +
         `💚ღ𝑴𝒂𝒏𝒚 𝑴𝒂𝒏𝒚 𝑯𝒂𝒑𝒑𝒚 𝑹𝒆𝒕𝒖𝒓𝒏 𝑶𝒇𝒇 𝑻𝒉𝒆 𝑫𝒂𝒚 𝑱𝒖𝒘𝒆𝒍ღ\n${link}`;
 
     // FIXED MULTI-SEND IMAGE
