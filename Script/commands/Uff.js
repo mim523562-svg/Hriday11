@@ -1,13 +1,13 @@
 const axios = require("axios");
 
 module.exports.config = {
-  name: "🧸",
-  version: "2.0.0",
+  name: "uff",
+  version: "3.0.0",
   hasPermssion: 0,
-  credits: "হৃদয় হাসান শান্ত",
+  credits: "💠 HRIDOY HASAN SHANTO 💠",
   description: "Random Video Reply",
   commandCategory: "Fun",
-  usages: "🧸",
+  usages: "uff",
   cooldowns: 5
 };
 
@@ -46,33 +46,52 @@ const videos = [
 ];
 
 module.exports.run = async function ({ api, event }) {
-  const video = videos[
-    Math.floor(Math.random() * videos.length)
-  ];
+  const { threadID, messageID } = event;
 
-  const message = `╭━━━〔 🧸 𝐇𝐑𝐈𝐃𝐎𝐘 𝐁𝐎𝐓 〕━━━╮
-  
-  🧸✨ 𝐑𝐀𝐍𝐃𝐎𝐌 𝐕𝐈𝐃𝐄𝐎 ✨🧸
-  
-  💠 Developer: হৃদয় হাসান শান্ত
-  🎬 Total Videos: ${videos.length}
-╰━━━━━━━━━━━━━━━━━━━━━━━━╯`;
+  const video =
+    videos[Math.floor(Math.random() * videos.length)];
+
+  const message = `╭━━━〔  riya hat marbe naki〕━━━╮
+┃
+┃ দেখ আবার হাত মারিস না 🫦🥵 
+┃
+┃ 💠 Developer: হৃদয় হাসান শান্ত
+┃ 🎬 Total Videos: ${videos.length}
+┃ 🎥 Enjoy Your Video!
+┃
+╰━━━━━━━━━━━━━━━━━━━━╯`;
 
   try {
     const response = await axios.get(video, {
       responseType: "stream",
-      timeout: 30000
+      timeout: 30000,
+      maxRedirects: 5
     });
 
-    api.sendMessage({
-      body: message,
-      attachment: response.data
-    }, event.threadID, event.messageID);
+    await new Promise((resolve, reject) => {
+      api.sendMessage(
+        {
+          body: message,
+          attachment: response.data
+        },
+        threadID,
+        (err, info) => {
+          if (err) return reject(err);
+          resolve(info);
+        },
+        messageID
+      );
+    });
+
   } catch (error) {
-    api.sendMessage(
-      "😿 ভিডিও পাঠানো যায়নি! আবার চেষ্টা করো।",
-      event.threadID,
-      event.messageID
+    console.error("[UFF VIDEO ERROR]", error.message);
+
+    return api.sendMessage(
+      `😿 ভিডিও পাঠানো যায়নি!\n\n` +
+      `💠 HRIDOY BOT\n` +
+      `🔄 আবার চেষ্টা করো অথবা ভিডিও লিংক পরীক্ষা করো।`,
+      threadID,
+      messageID
     );
   }
 };
