@@ -1,27 +1,54 @@
 module.exports.config = {
-	name: "unsend",
-	version: "1.0.1",
-	hasPermssion: 0,
-	credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_ ☢️",
-	description: "Gỡ tin nhắn của bot",
-	commandCategory: "system",
-	usages: "unsend",
-	cooldowns: 0
+  name: "unsend",
+  version: "2.0.0",
+  hasPermssion: 0,
+  credits: "💠 HRIDOY HASAN SHANTO 💠",
+  description: "Unsend bot messages",
+  commandCategory: "System",
+  usages: "Reply to a bot message with unsend",
+  cooldowns: 0
 };
 
 module.exports.languages = {
-	"vi": {
-		"returnCant": "Không thể gỡ tin nhắn của người khác.",
-		"missingReply": "Hãy reply tin nhắn cần gỡ."
-	},
-	"en": {
-		"returnCant": "কি unsent করমু replig করে বলো সুনা🫰",
-		"missingReply": "Mere Jis Msg ko Unsend Karna Hai Usme Reply Karke Likkho."
-	}
-}
+  vi: {
+    returnCant: "Không thể gỡ tin nhắn của người khác.",
+    missingReply: "Hãy reply tin nhắn cần gỡ."
+  },
+  en: {
+    returnCant:
+      "😿 শুধু বটের পাঠানো মেসেজ Unsend করা যাবে!",
+    missingReply:
+      "💌 যে মেসেজটি Unsend করতে চাও, সেটিতে Reply করে .unsend লেখো।"
+  }
+};
 
-module.exports.run = function({ api, event, getText }) {
-	if (event.messageReply.senderID != api.getCurrentUserID()) return api.sendMessage(getText("returnCant"), event.threadID, event.messageID);
-	if (event.type != "message_reply") return api.sendMessage(getText("missingReply"), event.threadID, event.messageID);
-	return api.unsendMessage(event.messageReply.messageID);
-	}
+module.exports.run = function ({ api, event, getText }) {
+  const { threadID, messageID, type, messageReply } = event;
+
+  if (type !== "message_reply" || !messageReply) {
+    return api.sendMessage(
+      getText("missingReply"),
+      threadID,
+      messageID
+    );
+  }
+
+  if (String(messageReply.senderID) !==
+      String(api.getCurrentUserID())) {
+    return api.sendMessage(
+      getText("returnCant"),
+      threadID,
+      messageID
+    );
+  }
+
+  return api.unsendMessage(messageReply.messageID, err => {
+    if (err) {
+      return api.sendMessage(
+        "❌ মেসেজ Unsend করা যায়নি!",
+        threadID,
+        messageID
+      );
+    }
+  });
+};
