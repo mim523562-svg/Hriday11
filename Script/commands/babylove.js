@@ -87,7 +87,7 @@ const triggers = [
 
   {
     // এখানে আগের syntax error ঠিক করা হয়েছে
-    keywords: ["mim gan", "ভাতিজা ভাবি গান"],
+    keywords: ["mim gan",/"রিয়া গান"],
     audioUrl: "https://files.catbox.moe/vw58fi.mp3",
     reply: "",
     fileName: "mariasong.mp3"
@@ -101,7 +101,7 @@ const triggers = [
   },
 
   {
-    keywords: ["dami un gar"],
+    keywords: ["👀"],
     audioUrl: "https://files.catbox.moe/07txpg.mp3",
     reply: "🎀 ukhe",
     fileName: "ukhe.mp3"
