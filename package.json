@@ -1,26 +1,37 @@
 {
-  "name": "hriday-chat-bot",
+  "name": "shahadat-chat-bot",
   "version": "3.0.0",
-  "description": "💠 HRIDOY HASAN SHANTO 💠 - Mirai Messenger Bot",
+  "description": "Made By SHAHADAT SAHU",
   "main": "Juwel.js",
   "engines": {
-    "node": "20.x",
-    "npm": ">=10.0.0 <11.0.0"
+    "node": "22.x",
+    "npm": ">=10.0.0 <13.0.0"
   },
   "scripts": {
     "start": "node Juwel.js",
-    "login": "node login.js"
+    "login": "node login"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/shahadat-sahu/SHAHADAT-CHAT-BOT.git"
   },
   "keywords": [
     "bot",
     "facebook",
+    "shahadatproject",
     "messenger",
-    "mirai",
-    "hriday",
-    "hridoy-hasan-shanto"
+    "javascript",
+    "shadat",
+    "UhasSahu",
+    "shahadat sahu",
+    "shahadat chat bot"
   ],
-  "author": "💠 HRIDOY HASAN SHANTO 💠",
+  "author": "SHAHADAT SAHU",
   "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/shahadat-sahu/SHAHADAT-CHAT-BOT/issues"
+  },
+  "homepage": "https://gitlab.com/shahadat-sahu/SHAHADAT-CHAT-BOT/issues",
   "dependencies": {
     "@miraipr0ject/assets": "^1.0.9",
     "axios": "^1.6.0",
