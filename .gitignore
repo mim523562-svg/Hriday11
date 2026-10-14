@@ -1,24 +1,52 @@
+# Dependencies
 node_modules/
 nodemodules/
 
+# Facebook session and appstate
 appstate.json
 appstate*.json
 appstate*.json.*
 appstate.json.bak
 appstate.json.tmp
 *.appstate.json
-config.json
+*.appstate
 SahuFcaConfig.json
+
+# Configuration and credentials
+config.json
 config.json.temp
 config.temp
 .env
 .env.*
 
+# Process and log files
 .bot.pid
 *.log
 npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
 
+# Database files (may contain private user data)
+data.sqlite
+data.sqlite-*
+*.sqlite
+*.sqlite3
+*.db
+
+# Operating system files
 .DS_Store
 Thumbs.db
+
+# Editors
 .idea/
 .vscode/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Build and coverage
+coverage/
+dist/
+build/
