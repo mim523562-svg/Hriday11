@@ -1,5 +1,5 @@
 {
-  "Author": "💠 HRIDOY HASAN SHANTO 💠",
+  "Author": "SHAHADAT SAHU",
   "version": "3.0.0",
   "language": "en",
   "adminOnly": false,
@@ -10,10 +10,10 @@
   "autoClean": true,
   "notiGroup": true,
   "NOTIFICATION": true,
-  "EMAIL": "",
-  "PASSWORD": "",
-  "OTPKEY": "",
-  "BOTNAME": "💠 HRIDOY BOT 💠",
+  "EMAIL": "Facebook number/ID",
+  "PASSWORD": "Facebook password",
+  "OTPKEY": "Facebook 2FA Secret Key",
+  "BOTNAME": " ⎯꯭𓆩꯭𝆺𝅥😻⃞𝐑⃞𝐈⃞𝐘𝐀⃞༢࿐",
   "PREFIX": "/",
   "usePrefix": true,
   "reactUnsend": [
@@ -23,6 +23,8 @@
     "😠"
   ],
   "ADMINBOT": [
+    "61593296285457",
+    "61593296285457",
     "61593296285457"
   ],
   "DEVELOPER": [
@@ -41,9 +43,9 @@
   },
   "Login": {
     "autoRetryLogin": true,
-    "maxLoginRetries": 5,
+    "maxLoginRetries": 100,
     "reconnectOnListenError": true,
-    "maxReconnectAttempts": 10,
+    "maxReconnectAttempts": 100,
     "reconnectBaseDelay": 3000,
     "reconnectMaxDelay": 30000,
     "persistAppState": true,
