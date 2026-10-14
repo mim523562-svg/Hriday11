@@ -4,8 +4,8 @@
   "description": "💠 HRIDOY HASAN SHANTO 💠 - Mirai Messenger Bot",
   "main": "Juwel.js",
   "engines": {
-    "node": "22.x",
-    "npm": ">=10.0.0 <13.0.0"
+    "node": "20.x",
+    "npm": ">=10.0.0 <11.0.0"
   },
   "scripts": {
     "start": "node Juwel.js",
