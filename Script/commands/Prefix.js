@@ -1,51 +1,81 @@
-const fs = require("fs-extra");
-
-module.exports.config = {
-  name: "prefix",
-  version: "3.0.0",
-  hasPermssion: 0,
-  credits: "💠 HRIDOY HASAN SHANTO 💠",
-  description: "Stylish Prefix System & Bot Information",
-  commandCategory: "Information",
-  usages: "[prefix]",
-  cooldowns: 5
-};
+/**
+ * ╔══════════════════════════════════════════╗
+ * ║        💠 HRIDOY PREFIX SYSTEM V4        ║
+ * ║        💖 HRIDOY HASAN SHANTO 💖         ║
+ * ║             MIRAI BOT FIX                ║
+ * ╚══════════════════════════════════════════╝
+ */
 
 const spamMap = new Map();
 const SPAM_COOLDOWN = 10000;
 
-const TRIGGERS = [
-  "prefix", "mprefix", "mpre", "bot prefix",
-  "what is the prefix", "what prefix", "bot name",
-  "how to use bot", "bot not working", "bot offline",
-  "prefx", "prfix", "perfix", "freefix",
-  "প্রিফিক্স", "বট প্রিফিক্স", "বটের নাম",
-  "বট কি", "প্রিফিক্স কি", "বট কাজ করছে না",
-  "বট অফলাইন", "প্রীফिक्स", "बॉट प्रीफिक्स"
-];
+module.exports.config = {
+  name: "prefix",
+  version: "4.0.0",
+  hasPermssion: 0,
+  credits: "💠 HRIDOY HASAN SHANTO 💠",
+  description: "Prefix Information System",
+  commandCategory: "Information",
+  usages: "prefix",
+  cooldowns: 3
+};
 
-const IMAGE_URL = "https://i.imgur.com/rNQJ9OA.jpeg";
-const OWNER_FB = "https://www.facebook.com/share/1DQCCDQ1iV/";
+const OWNER_FB =
+  "https://www.facebook.com/share/1DQCCDQ1iV/";
+
+const TRIGGERS = [
+  "prefix",
+  "mprefix",
+  "mpre",
+  "bot prefix",
+  "what is the prefix",
+  "what prefix",
+  "bot name",
+  "how to use bot",
+  "prefx",
+  "prfix",
+  "perfix",
+  "freefix",
+  "প্রিফিক্স",
+  "বট প্রিফিক্স",
+  "বটের নাম",
+  "বট কি",
+  "প্রিফিক্স কি",
+  "বট কাজ করছে না",
+  "বট অফলাইন",
+  "প্রীফিক্স",
+  "বটের প্রিফিক্স"
+];
 
 function getPrefix(threadID) {
   try {
-    const settings = global.data.threadData.get(
-      parseInt(threadID)
-    ) || {};
+    const threadData = global.data?.threadData;
 
-    return settings.PREFIX || global.config.PREFIX || ".";
-  } catch {
-    return global.config.PREFIX || ".";
+    if (threadData) {
+      let settings = threadData.get(String(threadID));
+
+      if (!settings && /^\d+$/.test(String(threadID))) {
+        settings = threadData.get(Number(threadID));
+      }
+
+      if (settings && settings.PREFIX) {
+        return settings.PREFIX;
+      }
+    }
+  } catch (err) {
+    console.error("[PREFIX DATA ERROR]", err.message);
   }
+
+  return global.config?.PREFIX || ".";
 }
 
 function getUptime() {
-  const sec = Math.floor(process.uptime());
-  const d = Math.floor(sec / 86400);
-  const h = Math.floor((sec % 86400) / 3600);
-  const m = Math.floor((sec % 3600) / 60);
+  const seconds = Math.floor(process.uptime());
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
 
-  return `${d} দিন ${h} ঘণ্টা ${m} মিনিট`;
+  return `${days} দিন ${hours} ঘণ্টা ${minutes} মিনিট`;
 }
 
 function getGreeting() {
@@ -59,25 +89,25 @@ function getGreeting() {
 }
 
 function getBotInfo(event, prefix) {
-  const users = global.data.allUserID || [];
-  const threads = global.data.allThreadID || [];
+  const users = global.data?.allUserID || [];
+  const threads = global.data?.allThreadID || [];
 
-  const threadName =
-    event.threadName ||
-    "Messenger Group";
+  const botName = global.config?.BOTNAME || "HRIDOY BOT V4";
 
-  return `╭━━━〔 💠 HRIDOY BOT 💠 〕━━━╮
+  return `
+╭━━━〔 💠 HRIDOY BOT 💠 〕━━━╮
 ┃
 ┃ ${getGreeting()} ❤️
 ┃ স্বাগতম আমার বট সিস্টেমে!
 ┃
 ┣━━━━━━━━━━━━━━━━━━
-┃ 💠 BOT INFORMATION
+┃ 💎 BOT INFORMATION
 ┣━━━━━━━━━━━━━━━━━━
-┃ ✦ বটের নাম: ${global.config.BOTNAME || "HRIDOY BOT V3"}
+┃ ✦ বটের নাম: ${botName}
 ┃ ✦ Prefix: 「 ${prefix} 」
-┃ ✦ Version: 3.0.0
+┃ ✦ Version: 4.0.0
 ┃ ✦ Uptime: ${getUptime()}
+┃ ✦ Status: 🟢 Online
 ┃
 ┣━━━━━━━━━━━━━━━━━━
 ┃ 📊 BOT STATISTICS
@@ -96,74 +126,78 @@ function getBotInfo(event, prefix) {
 ┣━━━━━━━━━━━━━━━━━━
 ┃ ⚡ COMMAND USAGE
 ┣━━━━━━━━━━━━━━━━━━
-┃ ✦ Prefix জানতে লিখুন: prefix
-┃ ✦ কমান্ড ব্যবহার করুন: ${prefix}help
+┃ ✦ Prefix জানতে: prefix
+┃ ✦ Help দেখতে: ${prefix}help
+┃ ✦ সব কমান্ড: ${prefix}helpall
 ┃
 ╰━━━〔 💖 POWERED BY HRIDOY 〕━━━╯
 
-💠 ভালো থাকুন, বটের সাথে থাকুন! 💠`;
+💠 ভালো থাকুন, বটের সাথে থাকুন! 💠
+`.trim();
 }
 
-module.exports.handleEvent = async function ({
-  event,
-  api
-}) {
-  try {
-    const { threadID, messageID, senderID, body } = event;
+function sendInfo(api, event) {
+  const prefix = getPrefix(event.threadID);
+  const message = getBotInfo(event, prefix);
 
-    if (!body || !threadID || !senderID) return;
+  return api.sendMessage(message, event.threadID, (err) => {
+    if (err) {
+      console.error("[PREFIX SEND ERROR]", err);
+    }
+  });
+}
+
+/**
+ * Automatic prefix reply
+ * Example: prefix / প্রিফিক্স
+ */
+module.exports.handleEvent = async function ({ event, api }) {
+  try {
+    if (!event || !api) return;
+
+    const { threadID, senderID, body } = event;
+
+    if (!threadID || !senderID || typeof body !== "string") {
+      return;
+    }
 
     const text = body.trim().toLowerCase();
 
     if (!TRIGGERS.includes(text)) return;
 
     const now = Date.now();
-    const last = spamMap.get(`${threadID}_${senderID}`) || 0;
+    const key = `${threadID}_${senderID}`;
+    const lastTime = spamMap.get(key) || 0;
 
-    if (now - last < SPAM_COOLDOWN) return;
+    if (now - lastTime < SPAM_COOLDOWN) return;
 
-    spamMap.set(`${threadID}_${senderID}`, now);
+    spamMap.set(key, now);
 
-    // Memory cleanup
+    // Clean expired entries to avoid unnecessary memory use
     if (spamMap.size > 2000) {
-      for (const [key, time] of spamMap) {
-        if (now - time > SPAM_COOLDOWN) {
-          spamMap.delete(key);
+      for (const [mapKey, time] of spamMap.entries()) {
+        if (now - time >= SPAM_COOLDOWN) {
+          spamMap.delete(mapKey);
         }
       }
     }
 
-    const reactions = ["💖", "✨", "🌸", "💫", "🦋"];
-
-    if (typeof api.setMessageReaction === "function") {
-      api.setMessageReaction(
-        reactions[Math.floor(Math.random() * reactions.length)],
-        messageID,
-        () => {},
-        true
-      );
-    }
-
-    const prefix = getPrefix(threadID);
-    const message = getBotInfo(event, prefix);
-
-    return api.sendMessage(
-      {
-        body: message,
-        attachment: await global.utils.getStreamFromURL(IMAGE_URL)
-      },
-      threadID
-    );
+    return sendInfo(api, event);
   } catch (err) {
-    console.error("[PREFIX ERROR]", err);
+    console.error("[HRIDOY PREFIX EVENT ERROR]", err);
   }
 };
 
+/**
+ * Manual command
+ * Example: .prefix
+ */
 module.exports.run = async function ({ event, api }) {
-  const prefix = getPrefix(event.threadID);
+  try {
+    if (!event || !api || !event.threadID) return;
 
-  return api.sendMessage(
-    getBotInfo(event, prefix),
-    event.threadID
-  );
+    return sendInfo(api, event);
+  } catch (err) {
+    console.error("[HRIDOY PREFIX COMMAND ERROR]", err);
+  }
 };
