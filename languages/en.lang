@@ -1,139 +1,116 @@
-If you want to move down the line, please use \n. e.g: tina\nSA HU.
-
-After changed, you have to restart the bot to use.
-
-Put the # character at the beginning of each sentence if you don't want the code to run those lines.
-
-Thanks to https://www.facebook.com/duong.than.net for translate to English!
-
-Main.js
-
+# Main.js
 Main.newVersionDetected=𝐘𝐨𝐮 𝐚𝐫𝐞 𝐮𝐬𝐢𝐧𝐠 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 %1, 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐢𝐬 %2.
-Main.errorFormat=Malformed module!
-Main.nameExist=Module's name is similar to another module!
-Main.notFoundLanguage=Module %1 don't support your language
-Main.notFoundPackage=Can't find package %1 support for module %2, installing...
-Main.cantInstallPackage=Can't install package %1 for module %2, error: %3
-Main.loadedPackage=Installed whole package successfully for module %1
-Main.loadedConfig=Installed config successfully for module %1
-Main.cantLoadConfig=Can't install config of module %1, error: %2
-Main.cantOnload=Can't launch setup of module %1, error: %1
-Main.successLoadModule=Successfully installed module %1
-Main.failLoadModule=Can't install module %1, error: %2
-Main.finishLoadModule=Installed %1 module commands and %2 module events successfully
-Main.foundPathAppstate=Sahuhstate successfully
-Main.notFoundPathAppstate=Error can't find appstate file maybe file is malformed!
-Main.checkListGban=Checking global ban list...
-Main.banDevice=Your device have been banned from SA HU, please contact to facebook m.me/61575698041722 to know more information or asking for unban key, if you already have unban key, please fill it below.
-Main.keyNotSameFormat=Wrong format, code must contain 6 number.
-Main.codeInputExpired=Your code is wrong or out of date.
-Main.unbanDeviceSuccess=Your device are unban now, please restart to use.
-Main.userBanned=You had been banned from sahu when %1 with reason: %2. Please contact to facebook m.me/61575698041722 to have more information!
-Main.finishCheckListGban=Checked global ban list
-Main.handleListenError=handleListene has occurred some unexpected errorr, error : %1
-Main.warningSourceCode=DETECTED THAT SOURCE CODE'S STRUCTURE HAD BEEN CHANGED , STOP NOW!
-Main.refreshListen=Refreshed handleListener...
-Main.successConnectDatabase=Connected to database successfully!
-Main.failConnectDatabase=Failed to connect to database, error: %1
+Main.errorFormat=মডিউলের ফরম্যাট সঠিক নয়!
+Main.nameExist=এই নামের মডিউল আগে থেকেই আছে!
+Main.notFoundLanguage=মডিউল %1 তোমার নির্বাচিত ভাষা সমর্থন করে না।
+Main.notFoundPackage=মডিউল %2-এর জন্য %1 প্যাকেজ পাওয়া যায়নি, ইনস্টল করা হচ্ছে...
+Main.cantInstallPackage=মডিউল %2-এর জন্য %1 প্যাকেজ ইনস্টল করা যায়নি। Error: %3
+Main.loadedPackage=মডিউল %1-এর প্রয়োজনীয় প্যাকেজ ইনস্টল হয়েছে।
+Main.loadedConfig=মডিউল %1-এর কনফিগ সফলভাবে লোড হয়েছে।
+Main.cantLoadConfig=মডিউল %1-এর কনফিগ লোড করা যায়নি। Error: %2
+Main.cantOnload=মডিউল %1 চালু করা যায়নি। Error: %2
+Main.successLoadModule=মডিউল %1 সফলভাবে লোড হয়েছে।
+Main.failLoadModule=মডিউল %1 লোড করা যায়নি। Error: %2
+Main.finishLoadModule=সফলভাবে %1টি কমান্ড ও %2টি ইভেন্ট লোড হয়েছে।
+Main.foundPathAppstate=appstate.json ফাইলের অবস্থান পাওয়া গেছে।
+Main.notFoundPathAppstate=appstate.json ফাইল পাওয়া যায়নি অথবা ফাইলটি সঠিক নয়!
+Main.checkListGban=গ্লোবাল ব্যান তালিকা পরীক্ষা করা হচ্ছে...
+Main.banDevice=তোমার ডিভাইসটি এই সিস্টেমে ব্লক করা হয়েছে। সহায়তার জন্য সংশ্লিষ্ট সাপোর্টের সঙ্গে যোগাযোগ করো।
+Main.keyNotSameFormat=কোডের ফরম্যাট সঠিক নয়। কোডে ৬টি সংখ্যা থাকতে হবে।
+Main.codeInputExpired=কোডটি ভুল অথবা মেয়াদ শেষ হয়ে গেছে।
+Main.unbanDeviceSuccess=ডিভাইসের ব্লক তুলে নেওয়া হয়েছে। ব্যবহার করতে বট রিস্টার্ট করো।
+Main.userBanned=তোমাকে %1 সময়ে ব্যান করা হয়েছে। কারণ: %2
+Main.finishCheckListGban=গ্লোবাল ব্যান তালিকা পরীক্ষা সম্পন্ন।
+Main.handleListenError=Listener-এ অপ্রত্যাশিত সমস্যা হয়েছে। Error: %1
+Main.warningSourceCode=সতর্কতা: সোর্স কোডের কাঠামো পরিবর্তিত হয়েছে!
+Main.refreshListen=Listener রিফ্রেশ করা হয়েছে...
+Main.successConnectDatabase=ডাটাবেসের সঙ্গে সফলভাবে সংযোগ হয়েছে!
+Main.failConnectDatabase=ডাটাবেসে সংযোগ করা যায়নি। Error: %1
 
-Shahadat specific texts
+# HRIDOY BOT specific messages
+shahadat.foundPathAppstate=appstate.json ফাইলের অবস্থান পাওয়া গেছে।
+shahadat.notFoundPathAppstate=appstate.json পাওয়া যায়নি অথবা ফাইলটি সঠিক নয়!
+shahadat.errorFormat=মডিউলের ফরম্যাট সঠিক নয়!
+shahadat.nameExist=এই মডিউলের নাম আগে থেকেই রয়েছে!
+shahadat.notFoundLanguage=মডিউল %1-এর জন্য ভাষা সমর্থন পাওয়া যায়নি।
+shahadat.notFoundPackage=মডিউল %2-এর জন্য প্রয়োজনীয় প্যাকেজ %1 পাওয়া যায়নি, ইনস্টল করা হচ্ছে...
+shahadat.cantInstallPackage=মডিউল %2-এর জন্য %1 প্যাকেজ ইনস্টল করা যায়নি। Error: %3
+shahadat.loadedPackage=মডিউল %1-এর সব প্রয়োজনীয় প্যাকেজ লোড হয়েছে।
+shahadat.loadedConfig=মডিউল %1-এর কনফিগ লোড হয়েছে।
+shahadat.cantOnload=মডিউল %1 চালু করা যায়নি। Error: %2
+shahadat.successLoadModule=মডিউল %1 সফলভাবে লোড হয়েছে।
+shahadat.failLoadModule=মডিউল %1 লোড করা যায়নি। Error: %2
+shahadat.finishLoadModule=সফলভাবে %1টি কমান্ড ও %2টি ইভেন্ট লোড হয়েছে।
+shahadat.handleListenError=Listener-এ সমস্যা হয়েছে। Error: %1
+shahadat.warningSourceCode=সতর্কতা: সোর্স কোডের কাঠামো অপ্রত্যাশিতভাবে পরিবর্তিত হয়েছে!
+shahadat.successConnectDatabase=ডাটাবেসের সঙ্গে সফলভাবে সংযোগ হয়েছে।
 
-shahadat.foundPathAppstate=Found appstate.json path successfully
-shahadat.notFoundPathAppstate=Appstate.json not found or invalid!
-shahadat.errorFormat=Invalid module format detected!
-shahadat.nameExist=Module name already exists in the system!
-shahadat.notFoundLanguage=No language support found for module: %1
-shahadat.notFoundPackage=Required package %1 not found for module %2, installing now...
-shahadat.cantInstallPackage=Failed to install package %1 for module %2. Error: %3
-shahadat.loadedPackage=All dependencies loaded successfully for module %1
-shahadat.loadedConfig=Configuration loaded successfully for module %1
-shahadat.cantOnload=Failed to initialize module %1. Error: %2
-shahadat.successLoadModule=Module %1 loaded successfully
-shahadat.failLoadModule=Failed to load module %1. Error: %2
-shahadat.finishLoadModule=Successfully loaded %1 commands and %2 events
-shahadat.handleListenError=Listener encountered an error: %1
-shahadat.warningSourceCode=WARNING: Source code structure modified unexpectedly!
-shahadat.successConnectDatabase=Database connection established successfully
+# includes/listen.js
+listen.startLoadEnvironment=Environment variables লোড করা হচ্ছে...
+listen.loadedEnvironmentThread=Thread environment variables লোড হয়েছে।
+listen.loadedEnvironmentUser=User environment variables লোড হয়েছে।
+listen.successLoadEnvironment=Environment variables সফলভাবে লোড হয়েছে।
+listen.failLoadEnvironment=Environment variables লোড করা যায়নি। Error: %1
 
-includes/listen.js
+# includes/controller/currencies.js
+currencies.needObjectOrArray=একটি Array অথবা Object দিতে হবে।
+currencies.needObject=একটি Object দিতে হবে।
+currencies.needNumber=একটি Number দিতে হবে।
 
-listen.startLoadEnvironment=Proceed to load the environment variable ...
-listen.loadedEnvironmentThread=Loaded thread environment variable successfully
-listen.loadedEnvironmentUser=Loaded user environment variable successfully
-listen.successLoadEnvironment=Loaded environment variable successfully
-listen.failLoadEnvironment=Can't load environment variable, error: %1
+# includes/controller/threads.js
+threads.needObjectOrArray=একটি Array অথবা Object দিতে হবে।
+threads.needObject=একটি Object দিতে হবে।
 
-includes/controller/currencies.js
+# includes/controller/users.js
+users.needObjectOrArray=একটি Array অথবা Object দিতে হবে।
+users.needObject=একটি Object দিতে হবে।
 
-currencies.needObjectOrArray=Have to be an Array or an Object or maybe both
-currencies.needObject=Have to be an Object
-currencies.needNumber= Have to be an number
+# includes/handle/handleCommand.js
+handleCommand.userBanned=বক্সে নিয়ম ভঙ্গ করার কারণে তোমাকে ব্যান করা হয়েছে! 🚫
+handleCommand.threadBanned=এই গ্রুপটি ব্যান করা হয়েছে! ⛔
+handleCommand.commandNotExist=⚠️ তোমার দেওয়া কমান্ডটি খুঁজে পাওয়া যায়নি! 🤦‍♂️ সঠিক কমান্ড ব্যবহার করো। 🎀
+handleCommand.commandThreadBanned=⚠️ এই কমান্ডটি গ্রুপে ব্যবহার করা যাচ্ছে না: "%1"
+handleCommand.commandUserBanned=তুমি "%1" কমান্ডটি ব্যবহার করতে পারবে না।
+handleCommand.threadNotAllowNSFW=এই কমান্ডটি শুধু অনুমোদিত অ্যাডমিন ব্যবহার করতে পারবেন।
+handleCommand.cantGetInfoThread=গ্রুপের তথ্য পাওয়া যায়নি। Error: %1
+handleCommand.permssionNotEnough="%1" — তোমার এই কমান্ড ব্যবহারের অনুমতি নেই! 🚫\n👑 এই কমান্ডটি শুধু অনুমোদিত অ্যাডমিন ব্যবহার করতে পারবেন।
+handleCommand.cantSetMessageReaction=মেসেজে Reaction দেওয়ার সময় সমস্যা হয়েছে। Error: %1
+handleCommand.executeCommand=[ %1 ] কমান্ড: %2 | ব্যবহারকারী: %3 | গ্রুপ: %4 | Args: %5 | সময়: %6ms
+handleCommand.commandError=কমান্ড %1 চালানোর সময় সমস্যা হয়েছে। Error: %2
 
-includes/controller/threads.js
+# includes/handle/handleCommandEvent.js
+handleCommandEvent.moduleError=কমান্ড %1 চালানোর সময় সমস্যা হয়েছে। Error: %2
 
-threads.needObjectOrArray=Have to be an Array or an Object or maybe both
-threads.needObject=Have to be an Object
+# includes/handle/handleCreateDatabase.js
+handleCreateDatabase.newThread=নতুন Thread: %1
+handleCreateDatabase.newUser=নতুন User: %1
 
-includes/controller/users.js
+# includes/handle/handleEvent.js
+handleEvent.executeEvent=[ %1 ] Event: %2 | গ্রুপ: %3 | সময়: %4ms
+handleEvent.eventError=Event %1 চালানোর সময় সমস্যা হয়েছে। Error: %4
 
-users.needObjectOrArray=Have to be an Array or an Object or maybe both
-users.needObject=Have to be an Object
+# includes/handle/handleReaction.js
+handleReaction.missingValue=সমস্যার সমাধানের জন্য প্রয়োজনীয় তথ্য পাওয়া যায়নি।
+handleReaction.executeError=Reaction পরিচালনার সময় সমস্যা হয়েছে। Error: %1
 
-includes/handle/handleCommand.js
+# includes/handle/handleReply.js
+handleReply.missingValue=উত্তর দেওয়ার জন্য প্রয়োজনীয় তথ্য পাওয়া যায়নি।
+handleReply.executeError=Reply পরিচালনার সময় সমস্যা হয়েছে। Error: %1
 
-handleCommand.userBanned=বক্স এ বেশি আবলামি করার কারণে তুমাকে ব্যান করা হয়েছে..!🚫
-handleCommand.threadBanned=Group Has Been Banned..!⛔️\nPlease Contact Owner MR JUWEL For Unban ⚠️
-handleCommand.commandNotExist=⚠️তোমার দেওয়া🗣️কমান্ডটি ভুল🤦‍♂️       এটা কমান্ড আমার মধ্য এড নাই⚠️       ✅সঠিক কমান্ড দাও বেবি♻️🎀
-handleCommand.commandThreadBanned=😘সঠিক কমান্ড করো বেবি🫂😘 "%1"
-handleCommand.commandUserBanned=You are unable to use command "%1"
-handleCommand.threadNotAllowNSFW=This Commnd Only use Andmin
-handleCommand.cantGetInfoThread=Can't get your thread's info, error: %1
-handleCommand.permssionNotEnough="%1 You Have No Permission! 🚫\nThis Command is Only For Boss 𝐉🅤𝐖🅔𝐋 😘\n\nপাগল!🥵এই কমান্ডটা তোর⚠জন্য না!\n👑 এইটা শুধুমাত্র আমার বস 𝐉🅤𝐖🅔𝐋 ব্যবহার করতে পারবে!\nতুই তো এডমিন লেভেলে নাই বুঝলি?🐸👋😂
-handleCommand.cantSetMessageReaction=Having some unexpected error at setMessageReaction, error: %1
-handleCommand.executeCommand=[ %1 ] Command used: %2 by user: %3 at thread: %4 | Args included: %5 | Processing time: %6ms
-handleCommand.commandError=Having some unexpected error when using command %1, error: %2
+# includes/handle/handleSchedule.js
+handleSchedule.exectuteError=মডিউল %1-এর Schedule চালানোর সময় সমস্যা হয়েছে। Error: %2
 
-includes/handle/handleCommandEvent.js
+# utils/index.js
+utils.throwError=ℹ️ এই কমান্ডটি কাজ না করলে অন্য কমান্ড চেষ্টা করো। সাহায্যের জন্য %1help %2 ব্যবহার করো। 💙
 
-handleCommandEvent.moduleError=Having some unexpected error when using command %1, error: %2
-
-includes/handle/handleCreateDatabase.js
-
-handleCreateDatabase.newThread=new thread: %1
-handleCreateDatabase.newUser=new user %1
-
-includes/handle/handleEvent.js
-
-handleEvent.executeEvent=[ %1 ] Event was executed: %2 at thread: %3 | Processing time: %4ms
-handleEvent.eventError=Having some error when executing event %1, error: %12
-
-includes/handle/handleReaction.js
-
-handleReaction.missingValue=Missing value to respond your problem
-handleReaction.executeError=Having some error when responding to your problem, error: %1
-
-includes/handle/handleReply.js
-
-handleReply.missingValue=Missing value to respond your problem
-handleReply.executeError=Having some error when responding your problem, error: %1
-
-includes/handle/handleSchedule.js
-
-handleSchedule.exectuteError=Having some error when schedule at module %1, error: %2
-
-utils/index.js
-
-utils.throwError=ℹ️ [!] ɪғ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ɪs ɴᴏᴛ �ᴏʀᴋɪɴɢ, ᴘʟᴇᴀsᴇ ᴜsᴇ ᴀɴᴏᴛʜᴇʀ ᴄᴏᴍᴍᴀɴᴅ ғᴏʀ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ. %1help %2 ᴜsᴇ ғᴏʀ ᴍᴏʀᴇ ᴜsᴀɢᴇ💙🥺
-
-updater.js
-
-updater.latestVersion=You are using the latest version
-updater.cantFindVersion=You are using an undefined version (%1), please check your package.json file again
-updater.newVersions=There are %1 new versions to update, starting to update...
-updater.updateSuccess=Update successfully%1
-updater.configChanged=The %1 has been changed, please check your config.json file again
-updater.installingPackages=Installing dependencies for bot...
-updater.installSuccess=Installed dependencies successfully, restart the bot to use the new version
-updater.backupSuccess=Successfully backed up changed files, see in the %1 folder
-updater.restartToApply=. Restart the bot to apply the new version
-updater.skipFile=There is a new version of the %1 file, but you have skipped this file during the update process with the comment %2 in this file
+# updater.js
+updater.latestVersion=তুমি সর্বশেষ সংস্করণ ব্যবহার করছ।
+updater.cantFindVersion=সংস্করণ %1 নির্ধারণ করা যায়নি। package.json পরীক্ষা করো।
+updater.newVersions=আপডেটের জন্য %1টি নতুন সংস্করণ পাওয়া গেছে। আপডেট শুরু হচ্ছে...
+updater.updateSuccess=আপডেট সফল হয়েছে। %1
+updater.configChanged=%1 পরিবর্তিত হয়েছে। config.json পরীক্ষা করো।
+updater.installingPackages=বটের প্রয়োজনীয় প্যাকেজ ইনস্টল করা হচ্ছে...
+updater.installSuccess=সব প্যাকেজ ইনস্টল হয়েছে। নতুন সংস্করণ ব্যবহার করতে বট রিস্টার্ট করো।
+updater.backupSuccess=পরিবর্তিত ফাইলগুলোর ব্যাকআপ %1 ফোল্ডারে রাখা হয়েছে।
+updater.restartToApply=নতুন পরিবর্তন কার্যকর করতে বট রিস্টার্ট করো।
+updater.skipFile=%1 ফাইলের নতুন সংস্করণ রয়েছে, কিন্তু %2 মন্তব্যের কারণে আপডেটটি বাদ দেওয়া হয়েছে।
