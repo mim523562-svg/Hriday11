@@ -1,3 +1,11 @@
+/**
+ * ╔══════════════════════════════════════╗
+ * ║          WOW VIDEO V4                ║
+ * ║       Random Video Sender            ║
+ * ║  Credit: HRIDOY HASAN SHANTO          ║
+ * ╚══════════════════════════════════════╝
+ */
+
 const axios = require("axios");
 const fs = require("fs-extra");
 const path = require("path");
@@ -6,12 +14,12 @@ module.exports = {
   config: {
     name: "wow",
     aliases: ["🤯", "wowvideo"],
-    version: "3.0.0",
-    author: "হৃদয় হাসান শান্ত",
+    version: "4.0.0",
+    author: "💠 HRIDOY HASAN SHANTO 💠",
     countDown: 5,
     role: 0,
-    shortDescription: "Random Wow 🤯 video",
-    longDescription: "Random Wow video with stylish captions",
+    shortDescription: "Random WOW video",
+    longDescription: "Send a random WOW video with a stylish caption",
     category: "media",
     guide: {
       en: "{pn}"
@@ -19,7 +27,6 @@ module.exports = {
   },
 
   onStart: async function ({ message, event, usersData }) {
-
     const videos = [
       "https://files.catbox.moe/xvc8bc.mp4",
       "https://files.catbox.moe/lh36zw.mp4",
@@ -38,87 +45,101 @@ module.exports = {
 
     const captions = [
       "🤯 ওয়াও! এটা আবার কী দেখলাম! 🔥",
-      "😳 ভাই এটা তো লেভেল ছাড়িয়ে গেল! 🔥",
+      "😳 ভাই এটা তো লেভেল ছাড়িয়ে গেল!",
       "😂 এটা দেখে হাসি আটকানো দায়! 🤣",
       "🔥 Pure WOW Moment! 🤯",
       "👀 শেষটা দেখার মতো ছিল! 😱",
       "🤯 Brain.exe Has Stopped Working! 😂",
-      "😎 এটাই তো আসল বিনোদন! 🔥",
-      "🤣 ভাই ভিডিওটা মারাত্মক! 🤯",
-      "😱 এমন জিনিস আগে দেখি নাই! 👀",
-      "🔥 দেখেই মুড ফ্রেশ! 😎",
-      "😂 কে বানাইছে এই জিনিস! 🤣",
-      "🤯 মাথা নষ্ট করে দিলো! 😂",
-      "👀 একবার দেখলে বারবার দেখতে ইচ্ছে করবে! 🔥",
-      "😳 এটা কি সত্যি নাকি! 🤯",
-      "🤣 হাসতে হাসতে শেষ! 😂",
-      "🔥 ভিডিওটা এক কথায় আগুন! 🔥",
-      "😎 WOW মানেই WOW! 🤯",
-      "😂 ভাই থামো, আর পারছি না! 🤣",
-      "👀 সবাই শেষ পর্যন্ত দেখো! 😱",
-      "🤯 এইটার জন্য একটা WOW তো প্রাপ্য! 🔥",
-      "😳 দেখার পর আমিও চুপ! 😂",
-      "🔥 আজকের সেরা ভিডিও! 🤯",
-      "🤣 এমন ভিডিও পেলে স্ক্রল করা যায় না! 👀",
-      "😎 Mood Off? এটা দেখো! 😂",
-      "🤯 কল্পনারও বাইরে! 🔥",
-      "😱 শেষের সিনটা অসাধারণ! 👀",
-      "😂 এই ভিডিওটা কে বানাইছে ভাই! 🤣",
-      "🔥 Level: Impossible! 🤯",
-      "👀 চোখ সরানো যাচ্ছে না! 😳",
-      "🤣 হাসির গ্যারান্টি! 😂",
-      "🤯 এইটা দেখে আমার সিস্টেম হ্যাং! 😂",
+      "😎 এটাই তো আসল বিনোদন!",
+      "🤣 ভাই ভিডিওটা মারাত্মক!",
+      "😱 এমন জিনিস আগে দেখি নাই!",
+      "🔥 দেখেই মুড ফ্রেশ!",
+      "🤯 কল্পনারও বাইরে!",
       "😎 Just WOW! 🔥",
-      "😳 এমন কাণ্ড কেউ করে! 🤯",
-      "🔥 পুরাই আগুন ভিডিও! 😎",
-      "😂 ভাই ভিডিওটা জমে গেছে! 🤣",
-      "👀 দেখো আর অবাক হও! 🤯",
-      "😱 এটা মিস করলে আফসোস! 🔥",
-      "🤣 হাসতে হাসতে চোখে পানি! 😂",
-      "🤯 এই দৃশ্যটা দেখার মতো! 👀",
-      "🔥 একদম ফাটাফাটি! 😎",
-      "😳 আমার তো বিশ্বাসই হচ্ছে না! 🤯",
-      "😂 আজকে হাসির ডোজ হয়ে গেল! 🤣",
-      "👀 সবাই একটু দেখো তো! 🔥",
-      "🤯 WOW এরও উপরে কিছু থাকলে এটা! 😱",
-      "😎 ভিডিও ভালো লাগলে ❤️ দিও!",
-      "🔥 ভালো লাগলে একটা React দিও! 🤍",
-      "😂 কেমন লাগলো কমেন্টে জানাও! 👀",
-      "🤯 আবারও বলি—WOW! 🔥",
-      "😱 শেষ পর্যন্ত না দেখলে মিস! 👀",
-      "🤣 এই ভিডিওর কোনো তুলনা নাই! 🔥",
-      "😎 আজকের Entertainment Done! 🤯"
+      "😂 ভাই ভিডিওটা জমে গেছে!",
+      "👀 দেখো আর অবাক হও!",
+      "🔥 ভালো লাগলে একটা React দিও!"
     ];
 
-    const emojis = [
-      "🔥",
-      "😳",
-      "😂",
-      "🔥",
-      "😱",
-      "👀",
-      "🤣",
-      "😎"
-    ];
+    const cacheDir = path.join(__dirname, "cache");
+    let filePath = null;
 
     try {
-      const video = videos[Math.floor(Math.random() * videos.length)];
-      const caption =
-        captions[Math.floor(Math.random() * captions.length)];
-      const emoji =
-        emojis[Math.floor(Math.random() * emojis.length)];
+      await fs.ensureDir(cacheDir);
 
-      let name = "Everyone";
+      let name = "বন্ধু";
 
       try {
-        if (event.senderID && usersData) {
-          const userInfo = await usersData.get(event.senderID);
-          if (userInfo && userInfo.name) {
-            name = userInfo.name;
-          }
+        if (event && event.senderID && usersData) {
+          const user = await usersData.get(event.senderID);
+          if (user && user.name) name = user.name;
         }
-      } catch (e) {
-        name = "Everyone";
+      } catch (_) {}
+
+      const caption =
+        captions[Math.floor(Math.random() * captions.length)];
+
+      // Random video order; retry other URLs if one fails.
+      const shuffled = [...videos].sort(() => Math.random() - 0.5);
+      let downloaded = false;
+      let lastError = null;
+
+      for (let i = 0; i < Math.min(4, shuffled.length); i++) {
+        const video = shuffled[i];
+        filePath = path.join(
+          cacheDir,
+          `wow_${Date.now()}_${i}.mp4`
+        );
+
+        try {
+          const response = await axios.get(video, {
+            responseType: "stream",
+            timeout: 90000,
+            maxRedirects: 5,
+            validateStatus: status => status >= 200 && status < 300,
+            headers: {
+              "User-Agent": "Mozilla/5.0"
+            }
+          });
+
+          const contentType = String(
+            response.headers["content-type"] || ""
+          ).toLowerCase();
+
+          if (
+            contentType.includes("text/html") ||
+            contentType.includes("application/json")
+          ) {
+            response.data.destroy();
+            throw new Error("URL returned a webpage instead of a video");
+          }
+
+          const writer = fs.createWriteStream(filePath);
+
+          await new Promise((resolve, reject) => {
+            response.data.on("error", reject);
+            writer.on("error", reject);
+            writer.on("finish", resolve);
+            response.data.pipe(writer);
+          });
+
+          const stat = await fs.stat(filePath);
+
+          if (!stat.size) {
+            throw new Error("Downloaded file is empty");
+          }
+
+          downloaded = true;
+          break;
+        } catch (error) {
+          lastError = error;
+          await fs.remove(filePath).catch(() => {});
+          filePath = null;
+        }
+      }
+
+      if (!downloaded || !filePath) {
+        throw lastError || new Error("All video URLs failed");
       }
 
       const body =
@@ -126,46 +147,37 @@ module.exports = {
         `┃ 👤 ${name}\n` +
         `┃\n` +
         `┃ ${caption}\n` +
-        `┃ ${emoji}\n` +
-        `╰━━━━━━━━━━━━━━━━━━╯`;
+        `┃ 💠 HRIDOY HASAN SHANTO 💠\n` +
+        `╰━━━━━━━━━━━━━━━━━━━━╯`;
 
-      const cacheDir = path.join(__dirname, "cache");
-      await fs.ensureDir(cacheDir);
-
-      const filePath = path.join(
-        cacheDir,
-        `wow_${Date.now()}.mp4`
-      );
-
-      const response = await axios({
-        method: "GET",
-        url: video,
-        responseType: "stream",
-        timeout: 60000
-      });
-
-      const writer = fs.createWriteStream(filePath);
-      response.data.pipe(writer);
-
-      await new Promise((resolve, reject) => {
-        writer.on("finish", resolve);
-        writer.on("error", reject);
-      });
-
+      // Wait until the bot's reply operation completes.
       await message.reply({
         body,
         attachment: fs.createReadStream(filePath)
       });
 
-      setTimeout(() => {
-        fs.remove(filePath).catch(() => {});
-      }, 15000);
-
     } catch (error) {
-      console.error("WOW VIDEO ERROR:", error);
-      return message.reply(
-        "❌ ভিডিও পাঠাতে সমস্যা হয়েছে!\n\n🔄 একটু পরে আবার চেষ্টা করুন।"
+      console.error(
+        "[WOW V4 ERROR]",
+        error.code || "",
+        error.message || error
       );
+
+      try {
+        await message.reply(
+          "😿 ভিডিও পাঠানো যায়নি!\n" +
+          "💠 HRIDOY HASAN SHANTO 💠\n\n" +
+          "🔄 ভিডিও লিংক অথবা Bot Logs পরীক্ষা করুন।"
+        );
+      } catch (replyError) {
+        console.error("[WOW REPLY ERROR]", replyError.message);
+      }
+    } finally {
+      if (filePath) {
+        setTimeout(() => {
+          fs.remove(filePath).catch(() => {});
+        }, 60000);
+      }
     }
   }
 };
