@@ -1,11 +1,14 @@
+
 const axios = require("axios");
+const fs = require("fs-extra");
+const path = require("path");
 
 module.exports.config = {
   name: "uff",
-  version: "3.0.0",
+  version: "4.0.0",
   hasPermssion: 0,
   credits: "💠 HRIDOY HASAN SHANTO 💠",
-  description: "Random Video Reply",
+  description: "Random video sender",
   commandCategory: "Fun",
   usages: "uff",
   cooldowns: 5
@@ -47,33 +50,78 @@ const videos = [
 
 module.exports.run = async function ({ api, event }) {
   const { threadID, messageID } = event;
-
-  const video =
-    videos[Math.floor(Math.random() * videos.length)];
-
-  const message = `╭━━━〔  riya hat marbe naki〕━━━╮
-┃
-┃ দেখ আবার হাত মারিস না 🫦🥵 
-┃
-┃ 💠 Developer: হৃদয় হাসান শান্ত
-┃ 🎬 Total Videos: ${videos.length}
-┃ 🎥 Enjoy Your Video!
-┃
-╰━━━━━━━━━━━━━━━━━━━━╯`;
+  const cacheDir = path.join(__dirname, "cache");
+  let filePath = null;
 
   try {
-    const response = await axios.get(video, {
-      responseType: "stream",
-      timeout: 30000,
-      maxRedirects: 5
-    });
+    await fs.ensureDir(cacheDir);
+
+    const shuffled = [...videos].sort(
+      () => Math.random() - 0.5
+    );
+
+    let downloaded = false;
+    let lastError;
+
+    for (let i = 0; i < Math.min(4, shuffled.length); i++) {
+      filePath = path.join(
+        cacheDir,
+        `uff_${Date.now()}_${i}.mp4`
+      );
+
+      try {
+        const response = await axios.get(shuffled[i], {
+          responseType: "arraybuffer",
+          timeout: 60000,
+          maxRedirects: 5,
+          maxContentLength: 40 * 1024 * 1024,
+          validateStatus: status => status === 200,
+          headers: { "User-Agent": "Mozilla/5.0" }
+        });
+
+        const data = Buffer.from(response.data);
+        const type = String(
+          response.headers["content-type"] || ""
+        ).toLowerCase();
+
+        if (
+          !data.length ||
+          type.includes("text/html") ||
+          type.includes("application/json")
+        ) {
+          throw new Error("Invalid video response");
+        }
+
+        await fs.writeFile(filePath, data);
+        downloaded = true;
+        break;
+      } catch (err) {
+        lastError = err;
+        await fs.remove(filePath).catch(() => {});
+        filePath = null;
+      }
+    }
+
+    if (!downloaded || !filePath) {
+      throw lastError || new Error("No video URL available");
+    }
+
+    const caption =
+      "╭━━━〔 🎬 UFF VIDEO 〕━━━╮\n" +
+      "┃ 🤯 WOW! RANDOM VIDEO\n" +
+      "┃ 🎥 Total Videos: " + videos.length + "\n" +
+      "┃ ❤️ ভালো লাগলে React দিও\n" +
+      "┃\n" +
+      "┃ 💠 HRIDOY HASAN SHANTO 💠\n" +
+      "╰━━━━━━━━━━━━━━━━━━━━╯";
 
     await new Promise((resolve, reject) => {
+      const attachment = fs.createReadStream(filePath);
+
+      attachment.once("error", reject);
+
       api.sendMessage(
-        {
-          body: message,
-          attachment: response.data
-        },
+        { body: caption, attachment },
         threadID,
         (err, info) => {
           if (err) return reject(err);
@@ -84,14 +132,25 @@ module.exports.run = async function ({ api, event }) {
     });
 
   } catch (error) {
-    console.error("[UFF VIDEO ERROR]", error.message);
+    console.error(
+      "[UFF VIDEO ERROR]",
+      error.code || "",
+      error.message || error
+    );
 
     return api.sendMessage(
-      `😿 ভিডিও পাঠানো যায়নি!\n\n` +
-      `💠 HRIDOY BOT\n` +
-      `🔄 আবার চেষ্টা করো অথবা ভিডিও লিংক পরীক্ষা করো।`,
+      "😿 ভিডিও পাঠানো যায়নি!\n" +
+      "💠 HRIDOY HASAN SHANTO 💠\n" +
+      "🔄 ভিডিও লিংক অথবা Railway Logs পরীক্ষা করো।",
       threadID,
       messageID
     );
+
+  } finally {
+    if (filePath) {
+      setTimeout(() => {
+        fs.remove(filePath).catch(() => {});
+      }, 60000);
+    }
   }
 };
