@@ -60,7 +60,7 @@ function alreadyHandled(messageID) {
 
 // ====== ট্রিগার লিস্ট (বাংলা + ইংরেজি) ======
 const TRIGGER_WORDS = [
-  "baby", "bot", "bby", "jan", "juwel", "bbz", "kolixa", "babu",
+  "baby", "bot", "bby", "jan", "@Rɩƴʌ ɱoŋɩ Rɩƴʌ ɱoŋɩ", "@Riya Riya", "kolixa", "babu",
   "nila", "jui", "tisha", "pia", "pakhi", "mim", "maria", "hippi", "mari", "xan",
   "নিলা", "নীলা", "জুই", "তিশা", "পিয়া", "পাখি", "মিম",
   "জান", "বট", "বেবি", "বাবু"
