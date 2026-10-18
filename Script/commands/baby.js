@@ -1,1 +1,359 @@
-const _0x2ee698=_0x3257;(function(_0x2ca7a5,_0x36e72e){const _0x585583=_0x3257,_0x520ec6=_0x2ca7a5();while(!![]){try{const _0x1555cd=parseInt(_0x585583(0x1db))/0x1*(parseInt(_0x585583(0x21d))/0x2)+-parseInt(_0x585583(0x192))/0x3*(-parseInt(_0x585583(0x205))/0x4)+parseInt(_0x585583(0x211))/0x5+parseInt(_0x585583(0x1e1))/0x6+parseInt(_0x585583(0x1ed))/0x7+-parseInt(_0x585583(0x1d4))/0x8*(-parseInt(_0x585583(0x201))/0x9)+-parseInt(_0x585583(0x1fe))/0xa*(parseInt(_0x585583(0x1c6))/0xb);if(_0x1555cd===_0x36e72e)break;else _0x520ec6['push'](_0x520ec6['shift']());}catch(_0xc14eca){_0x520ec6['push'](_0x520ec6['shift']());}}}(_0x25b5,0x3df5c));const axios=require(_0x2ee698(0x217)),fs=require(_0x2ee698(0x18a)),path=require(_0x2ee698(0x212));function _0x3257(_0x4bc945,_0xa681f9){_0x4bc945=_0x4bc945-0x17d;const _0x25b57b=_0x25b5();let _0x3257b6=_0x25b57b[_0x4bc945];return _0x3257b6;}let count_req=0x0;const baseApiUrl=_0x2ee698(0x1bb);function toBoldFont(_0xb0ee0d){const _0x3fae2a={'A':'𝗔','B':'𝗕','C':'𝗖','D':'𝗗','E':'𝗘','F':'𝗙','G':'𝗚','H':'𝗛','I':'𝗜','J':'𝗝','K':'𝗞','L':'𝗟','M':'𝗠','N':'𝗡','O':'𝗢','P':'𝗣','Q':'𝗤','R':'𝗥','S':'𝗦','T':'𝗧','U':'𝗨','V':'𝗩','W':'𝗪','X':'𝗫','Y':'𝗬','Z':'𝗭','a':'𝗮','b':'𝗯','c':'𝗰','d':'𝗱','e':'𝗲','f':'𝗳','g':'𝗴','h':'𝗵','i':'𝗶','j':'𝗷','k':'𝗸','l':'𝗹','m':'𝗺','n':'𝗻','o':'𝗼','p':'𝗽','q':'𝗾','r':'𝗿','s':'𝘀','t':'𝘁','u':'𝘂','v':'𝘃','w':'𝘄','x':'𝘅','y':'𝘆','z':'𝘇','0':'𝟬','1':'𝟭','2':'𝟮','3':'𝟯','4':'𝟰','5':'𝟱','6':'𝟲','7':'𝟳','8':'𝟴','9':'𝟵'};let _0x448af4='';for(let _0x2ff719 of _0xb0ee0d){_0x448af4+=_0x3fae2a[_0x2ff719]||_0x2ff719;}return _0x448af4;}function protectNumber(_0x247d11){const _0x3f24fa='+8801943488192';if(_0x247d11['includes'](_0x3f24fa))return _0x247d11;return _0x247d11;}function containsEnglish(_0x49d0d1){return/[a-zA-Z]/['test'](_0x49d0d1);}function processReply(_0x32e7b5){let _0x345629=protectNumber(_0x32e7b5);if(containsEnglish(_0x345629))return toBoldFont(_0x345629);return _0x345629;}async function sendTypingIndicator(_0xe19687,_0x1e9587){const _0xdc04de=_0x2ee698;try{if(typeof _0xe19687[_0xdc04de(0x191)]==='function')return await _0xe19687['sendTyping'](_0x1e9587),!![];if(global['mqttClient']){const _0x316f12={'app_id':0x7e36f3fcc43bc,'payload':JSON['stringify']({'label':0x3,'payload':JSON['stringify']({'thread_key':_0x1e9587['toString'](),'is_group_thread':+(_0x1e9587[_0xdc04de(0x222)]()[_0xdc04de(0x1f8)]>=0x10),'is_typing':0x1,'attribution':0x0}),'version':0x14c87ffccb0120}),'request_id':++count_req,'type':0x4};return global['mqttClient']['publish'](_0xdc04de(0x1f6),JSON[_0xdc04de(0x182)](_0x316f12)),!![];}return![];}catch(_0x58ac12){return console[_0xdc04de(0x1dd)](_0xdc04de(0x1af),_0x58ac12[_0xdc04de(0x1a0)]),![];}}async function stopTypingIndicator(_0x43cdc7,_0x431e25){const _0x3706ef=_0x2ee698;try{if(typeof _0x43cdc7[_0x3706ef(0x17f)]===_0x3706ef(0x1ee))return await _0x43cdc7['stopTyping'](_0x431e25),!![];if(global['mqttClient']){const _0x425c08={'app_id':0x7e36f3fcc43bc,'payload':JSON[_0x3706ef(0x182)]({'label':0x3,'payload':JSON[_0x3706ef(0x182)]({'thread_key':_0x431e25['toString'](),'is_group_thread':+(_0x431e25[_0x3706ef(0x222)]()['length']>=0x10),'is_typing':0x0,'attribution':0x0}),'version':0x14c87ffccb0120}),'request_id':++count_req,'type':0x4};return global[_0x3706ef(0x17e)]['publish'](_0x3706ef(0x1f6),JSON[_0x3706ef(0x182)](_0x425c08)),!![];}return![];}catch(_0xe9bfdc){return console['log'](_0x3706ef(0x204),_0xe9bfdc['message']),![];}}function _0x25b5(){const _0x2a9b42=['ভালোবাসা\x20নামক\x20আব্লামি\x20করতে\x20মন\x20চাইলে\x20আমার\x20বস\x20乛\x20M𝆠፝֟R\x20ཐི༏ཋྀ\x20Šħẫňto Hřiȡẫy Ħẫššẫň\x20এর\x20ইনবক্স\x20চলে\x20যাও-🙊🥱👅\x20🌻\x0a\x0aŠħẫňto Hřiȡẫy Ħẫšš\x20+Šħẫňto Hřiȡẫy Ħ','Sorry,\x20I\x20couldn\x27t\x20understand\x20😅','দূরে\x20যা,\x20তোর\x20কোনো\x20কাজ\x20নাই,\x20শুধু\x20bot\x20bot\x20করিস\x20😉😋🤣','senderID','data','⎯͢🩷𝐌𝐑ꜛ⪼─⃞⤹\x20Šħẫňto Hřiȡẫ國🩷🪽','51424OXzgDl','Bolo\x20Babu,\x20তুমি\x20কি\x20আমার\x20বস\x20乛\x20M𝆠፝֟R\x20ཐི༏ཋྀ\x20Šħẫňto Hřiȡẫy Ħꜛཐི༏ཋྀ࿐\x20কে\x20ভালোবাসো?\x20🙈💋\x0a\x0a𝗪𝗵𝗮𝘁𝗮𝗔𝗽𝗽\x20+Šħẫňto Hřiȡẫy Ħẫ','আমাকে\x20ডাকলে\x20,আমি\x20কিন্তু\x20কিস\x20করে\x20দিবো😘','chat','আমারে\x20এতো\x20ডাকিস\x20না\x20আমি\x20মজা\x20করার\x20mood\x20এ\x20নাই\x20এখন😒','⎯͢⎯⃝😹••প্রি্ঁয়্ঁ____স্ঁম্ঁয়্ঁ\x20পা্ঁই্ঁলে্ঁ\x20আ্ঁমা্ঁর্ঁ\x20শ্ঁহ্ঁরে্ঁ____আ্ঁই্ঁসো্ঁ😚🥰\u00a0\x20পা্ঁগ্ঁলা্ঁ\x20কু্ঁত্তা্ঁ\x20🐈🐈‍⬛দি্ঁয়ে্ঁ\x20__\x20দৌ্ঁড়্ঁ\x20খা্ঁও্ঁয়া্ঁমু্ঁ\x20🙂🐸','কি\x27রে\x20গ্রুপে\x20দেখি\x20একটাও\x20বেডি\x20নাই-🤦‍🥱💦','52313mjEghu','জান\x20আমার\x20বস\x20乛\x20M𝆠፝֟R\x20ཐི༏ཋྀ\x20Šħẫňto Hřiȡẫy Ħẫššẫňꜛཐི༏ཋྀ࿐\x20কে\x20বিয়ে\x20করবা-🙊😘🥳','log','উফফ\x20বুঝলাম\x20না\x20এতো\x20ডাকছেন\x20কেনো-😤😡😈',',,•\x0a\x0a⎯͢⎯⃝🩵🐰রি্ঁলে্ঁশ্ঁনে্ঁর্ঁ\x20বা্ঁজা্ঁরে্ঁ\x20আ্ঁমি্ঁ\x20এ্ঁক্ঁ\x0a\x0a\u00a0⎯⃝🥹🪶𝐒𝐢𝐧𝐠𝐥𝐞\u00a0\x20শি্ঁশু্ঁ⎯⃝_🩷🪽😩\x0a\x0a🐸','some','1554756FvhgFQ','হাজারো\x20লুচ্চা\x20লুচ্চির\x20ভিরে-🙊🥵আমার\x20বস\x20সাহু\x20এক\x20নিস্পাপ\x20ভালো\x20মানুষ-🥱🤗🙆‍♂️',',,\u00a0\x20\u00a0\x20🥹\x0a\x0a\u00a0\u00a0🫲🏻👚🫱🏻\u00a0\x0a\x0a\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0👖\x0a\x0a°আ্ঁসো্ঁ\x20বু্ঁকে্ঁ\x20আ্ঁসো্ঁ🥹🙈\x20𝐏𝐢𝐨\x20🥲\x0a\x0a\x0aNodi\x20তে্ঁ\x20নি্ঁয়ে্ঁ\x20ফে্ঁলে্ঁ\x20dei,,,!!!👻🥴🥴🤣আ্ঁমা্ঁর্ঁ\x20প্রে্ঁমেৃঁ\x20তো্ঁ\x20প্ঁর্ঁবা্ঁ\x20না্ঁㅤㅤㅤ\u00a0\x20ㅤ','🌺⎯͢⎯⃝🫵♡\x20_-\x20আ্ঁমি্ঁ\x20হা্ঁজা্ঁরো্ঁ\x20ম্ঁশা্ঁর্ঁ\x20Crush!🥹🫰⎯⃝🍒___⎯͢⎯⃝🩷🐰😏😒⎯͢⎯⃝😁','আমাকে\x20বট\x20না\x20বলে\x20,\x20বস\x20乛\x20M𝆠፝֟R\x20ཐི༏ཋྀ\x20Šħẫňto Hřiȡẫy Ħẫšš\x20কে\x20জানু\x20বল\x20জানু\x20😘','simsimi','😒⎯͢⎯⃝★⎯͢⎯⃝🌚♦️-\x22I\x20love\x20you\x20বি্ঁক্রি্ঁ\x20ক্ঁর্ঁতে্ঁ\x20আ্ঁস্ঁছি্ঁ-\x22\x20🙃\x0a\x0a🍁-!\x22তু্ঁমি্ঁ\x20চা্ঁই্ঁলে্ঁ\x20অ্ঁর্ডা্ঁর্ঁ\x20দি্ঁতে্ঁ\x20পা্ঁরো্ঁ\x20ডে্ঁলি্ঁভা্ঁরি্ঁ\x20-\x22🥵\x0a\x0a-\x22চা্ঁর্জ্ঁ\x20চু্ঁম্মা্ঁহ্ঁ-\x22🥵💋','client','__𝐍𝆠꯭፝֟𝐞𝐞𝐝\x20𝐑𝐞͜͡𝐚𝐥\x20𝐋𝆠꯭፝֟𝐨𝐯𝐞))🥺😽🌷','trim','আমাকে\x20না\x20ডেকে\x20আমার\x20বস\x20乛\x20M𝆠፝֟R\x20ཐི༏ཋྀ\x20Šħẫňto Hřiȡẫy Ħẫššẫň࿐\x20কে\x20একটা\x20জি\x20এফ\x20দাও-😽🫶🌺\x0a\x0a𝗪𝗵𝗮𝘁𝗮𝗔𝗽𝗽\x20+601116710390','হুম\x20জান\x20তোমারে\x20উম্মমাহ😷😘','162407AhsMlz','function','bot','Yes,\x20I\x27m\x20here\x20😘','teach\x20','split','❌\x20API\x20not\x20loaded\x20yet.','baby','🤢💜✨⎯͢⎯⃝🥹༊𝄟≛😾\x22দে্ঁহি্ঁ\x20ই্ঁক্টু্ঁ\x20সা্ঁই্ঁট্ঁ\x20দে্ঁ\x20ও্ঁরে্ঁ,,থা্ঁপ্পা্ঁড়্ঁ,,\x20দি্ঁমু্ঁ⎯💦🤥','/ls_req','٭\x20⣿\x20˔🎻\x20๑\x0a\x0a\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\x09\x20\u00a0\x20𝄖𝄗𝄗𝄙𝄙𝄗𝄗𝄖\x0a\x0a\x0a\u00a0⊹\x20⎯\x20🍥️️️️️\x20ֹ︵\x20️️️️️️️️️️️️️️𐙚️️️️️️️️️️️️️️\x20__♡গ𝆠፝֟ল্পটা\x20ত𝆠፝֟খন𝆠፝֟ই\x20সু𝆠፝֟ন্দ𝆠፝֟র\x20ছি𝆠፝֟লো,,য𝆠֖፝ন\x20তু𝆠፝֟মি\x20ছি𝆠፝֟লে\x20অ𝆠፝֟পরি𝆠፝֟চি𝆠፝֟ত\x20আ𝆠፝֟র\x20আ𝆠፝֟মি\x20ছি𝆠፝֟লা𝆠፝֟ম\x20আ𝆠፝֟মি𝆠፝֟তে\x20সী𝆠፝֟মাব𝆠፝�দ্ধ♡\x22..__\x20‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎..!‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎ːꜛ:-❫\x20⋆‎‎‎‎‎‎‎‎‎‎‎‎‎‎🫠💔🪽🥢\x0a\x0a\x0a\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0⇄ʝυɯҽʅ\x20!¡\x20-💗🌷🙂\x20‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎!‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎ㅤㅤㅤ\u00a0\x20ㅤ','length','বার\x20বার\x20Disturb\x20করছিস\x20কোনো😾,আমার\x20জানুর\x20সাথে\x20ব্যাস্ত\x20আছি😋','যে\x20ছেড়ে\x20গেছে-😔-তাকে\x20ভুলে\x20যাও-🙂-আমার\x20বস\x20乛\x20M𝆠፝֟R\x20ཐི༏ཋྀ\x20Šħẫňto Hřiȡẫy Ħẫššẫňꜛཐི༏ཋྀ࿐\x20এর\x20সাথে\x20প্রেম\x20করে\x20তাকে\x20দেখিয়ে\x20দাও-🙈🐸🤗\x0a\x0a𝗪𝗵𝗮𝘁𝗮𝗔𝗽𝗽\x20+60111671390','প্রেম\x20করতে\x20চাইলে\x20বস\x20乛\x20M𝆠፝֟R\x20ཐི༏ཋྀ\x20Šħẫňto Hřiȡẫy Ħẫššẫň\x20এর\x20ইনবক্সে\x20চলে\x20যা\x20😏🐸\x0a\x0a𝗪𝗵𝗮𝘁𝗮𝗔𝗽𝗽\x20+601126710390','messageID','👌ܔ⑅⃝➔✾𝄞m🙆‍♀️🤭🙊🙈🫵','12635320uyRZuo','এতো\x20ডেকো\x20না,প্রেম\x20এ\x20পরে\x20যাবো\x20তো🙈','乛\x20M𝆠፝֟R\x20ཐི༏ཋྀ\x20JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐','234YRQcjY','❌\x20|\x20Use:\x20remove\x20[Question]','bbz','⚠️\x20Stop\x20typing\x20error:','1122844bdhjWg','বেশি\x20bot\x20Bot\x20করলে\x20leave\x20নিবো\x20কিন্তু😒😒','হুম\x20বলো\x20কি\x20বলবে😒','আজকে\x20আমার\x20মন\x20ভালো\x20নেই\x20তাই\x20আমারে\x20ডাকবেন\x20না-😪🤧','responseLength','👆──⃜⃜͢͢👊๛⃝তা্ঁর্ঁ\x20ছি্ঁড়া্ঁ\x20পা্ঁব্ঁলি্ঁক্ঁ\x20──⃜⃜͢͢😕๛⃝──͢─','٭\x20⣿\x20˔🎻\x20๑\x0a\x0a\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\x09\x20\u00a0\x20𝄖𝄗𝄗𝄙𝄙𝄗𝄗𝄖\x0a\x0a\x0a\u00a0⊹\x20⎯\x20🍥️️️️️\x20ֹ︵\x20️️️️️️️️️️️️️️𐙚️️️️️️️️️️️️️️\x20__♡অ༐𝆠፝֟মি\x20বড়𝆠፝֟ই\x20লো𝆠፝֟ভী,,এ𝆠፝֟ত\x20কি𝆠֛፝ছু\x20থা𝆠፝֟ক༐𝆠፝֟র\x20প𝆠፝֟র\x20ও\x20আ𝆠፝֟মি\x20শু𝆠፝֟ধু\x20তো𝆠፝֟ম༐𝆠፝֟র\x20অ𝆠፝֟ভ༐𝆠፝֟বে\x20অ𝆠፝֟ভ༐𝆠፝֟বী♡\x22..__\x20‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎..!‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎ːꜛ:-❫\x20⋆‎‎‎‎‎‎‎‎‎‎‎‎‎‎😅💔🪽🥢\x0a\x0a\x0a\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0⇄ʝυɯҽʅ\x20!¡\x20-💗🌷🙂\x20‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎!‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎\x20‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎\x20‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎\u00a0\x20\u00a0\x20\u00a0\x20\u00a0\x20\u00a0\x20\u00a0\x20\u00a0\x20!\x20','🫵তোমারে\x20প্রচুর\x20ভাল্লাগে-😽-সময়\x20মতো\x20প্রপোজ\x20করমু\x20বুঝছো-🔨😼-ছিট\x20খালি\x20রাইখো-\x20🥱🐸🥵','❥︎ꔹ┄🥱🤟🐸🌝🤧গা্ঁল্ঁটা্ঁ\x20দে্ঁ\x20তো্ঁরে্ঁ\x20এ্ঁকৃ্ঁটা্ঁ\x20চু্ঁম্মা্ঁ\x20দে্ঁই্ঁ💋🌱🪽🪄','˖°☁️🌷།國།⋆\x20˚｡⋆୨୧˚\x0a\x0a‎─⪼আর\x20যে\x20অভিযোগ\x20অবশিষ্টツ\x0a\x0a\u00a0থাকবে\x20সেগুলো\x20কাফনের\x20উপর\x0a\x0a\u00a0লিখে\x20রাইখো\x20আমার_-💔🙂\x0a\x0a\x09\x09\x09\x09\x20✧˖°☁️🌷།國།⋆\x20˚｡⋆୨୧️️️️','আমাকে\x20এতো\x20না\x20ডেকছ\x20কেন\x20ভলো\x20টালো\x20বাসো\x20নাকি🤭🙈','threadID','2104815pSeugY','path','𝗢𝗶𝗶\x20আন্টি-🙆‍♂️-তোমার\x20মেয়ে\x20চোখ\x20মারে-🥺🥴🐸','exports','bby','আর\x20কত\x20বার\x20ডাকবি\x20,শুনছি\x20তো','axios','&senderID=','আজ\x20থেকে\x20আর\x20কাউকে\x20পাত্তা\x20দিমু\x20চিহ্নিত\x20না\x20-!😏-কারণ\x20আমি\x20ফর্সা\x20হওয়ার\x20ক্রিম\x20কিনছি\x20-!
+
+/**
+ * ╔══════════════════════════════════════╗
+ * ║          💠 BABY AI V10 💠           ║
+ * ║      Stylish Auto Reply System       ║
+ * ║       HRIDOY HASAN SHANTO             ║
+ * ╚══════════════════════════════════════╝
+ *
+ * System: Mirai Legacy
+ * Format: module.exports = function ({ api, event })
+ */
+
+const axios = require("axios");
+const fs = require("fs-extra");
+const path = require("path");
+const os = require("os");
+
+const OWNER = "💠 HRIDOY HASAN SHANTO 💠";
+const FACEBOOK_ID = "1F7P4o3zfY";
+const WHATSAPP = "+601116710390";
+const API_URL = "https://noobs-api.top/dipto/baby";
+
+const DATA_DIR = path.join(__dirname, "baby_data");
+const OFF_FILE = path.join(DATA_DIR, "disabled.json");
+
+fs.ensureDirSync(DATA_DIR);
+
+let requestCount = 0;
+const recentMessages = new Map();
+
+const TRIGGERS = [
+  "baby", "bby", "bot", "babu", "babe", "jan",
+  "janu", "bbz", "baby ai", "hey bot",
+  "বট", "বেবি", "বাবু", "জান", "জানু",
+  "নীলা", "নিলা", "জুই", "মিম", "পাখি",
+  "তিশা", "পিয়া", "বলো বেবি"
+];
+
+const REPLIES = [
+  "🙈💕 এই যে জানু, ডাকছো কেন? বলো শুনছি!",
+  "😼💗 বেশি বট বট করো না, লজ্জা লাগে!",
+  "🌸✨ হ্যাঁ বলো, তোমার কী সাহায্য লাগবে?",
+  "🥹🫶 এই যে বাবু, আমি কিন্তু অনলাইনে আছি!",
+  "😽💞 আমাকে ডাকলে কিছু তো বলতেই হবে!",
+  "🐸💝 কী হয়েছে? মন খারাপ নাকি?",
+  "🌷💚 আসসালামু আলাইকুম! কেমন আছো?",
+  "🤭💕 বলো জান, কী বলতে চাও?",
+  "😹💫 এত ডাকাডাকি কেন? মেসেজ দাও!",
+  "💖🌻 তোমার মেসেজ পেয়ে হাজির হয়ে গেলাম!",
+  "😌🩵 আমি শুনছি, এবার বলো কী হয়েছে!",
+  "🙊🌺 বেবি হাজির! কী খবর তোমার?",
+  "🐰💗 ডাক শুনেছি, এখন বলো কী চাই!",
+  "✨🫶 হ্যালো! তোমার সঙ্গে কথা বলতে প্রস্তুত!",
+  "🌸💌 একটা সুন্দর মেসেজ দাও, আমিও রিপ্লাই দেব!"
+];
+
+const STYLES = [
+  "💠 ━━━━━━━━ ❖ ━━━━━━━━ 💠",
+  "🌸༺♡༻🌸",
+  "🩷⎯͢⎯⃝🌷⎯͢⎯⃝🩷",
+  "╭━━━💫━━━╮",
+  "꧁༺💖༻꧂"
+];
+
+function random(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+function boldEnglish(text) {
+  const map = {
+    a: "𝗮", b: "𝗯", c: "𝗰", d: "𝗱", e: "𝗲",
+    f: "𝗳", g: "𝗴", h: "𝗵", i: "𝗶", j: "𝗷",
+    k: "𝗸", l: "𝗹", m: "𝗺", n: "𝗻", o: "𝗼",
+    p: "𝗽", q: "𝗾", r: "𝗿", s: "𝘀", t: "𝘁",
+    u: "𝘂", v: "𝘃", w: "𝘄", x: "𝘅", y: "𝘆",
+    z: "𝘇",
+    A: "𝗔", B: "𝗕", C: "𝗖", D: "𝗗", E: "𝗘",
+    F: "𝗙", G: "𝗚", H: "𝗛", I: "𝗜", J: "𝗝",
+    K: "𝗞", L: "𝗟", M: "𝗠", N: "𝗡", O: "𝗢",
+    P: "𝗣", Q: "𝗤", R: "𝗥", S: "𝗦", T: "𝗧",
+    U: "𝗨", V: "𝗩", W: "𝗪", X: "𝗫", Y: "𝗬",
+    Z: "𝗭"
+  };
+
+  return String(text).replace(/[a-zA-Z]/g, c => map[c] || c);
+}
+
+function formatReply(text) {
+  return (
+    random(STYLES) + "\n\n" +
+    boldEnglish(text) +
+    "\n\n" + random(STYLES) +
+    "\n💠 " + OWNER
+  );
+}
+
+function containsTrigger(text) {
+  const lower = String(text || "").toLowerCase();
+
+  return TRIGGERS.some(word => {
+    const trigger = word.toLowerCase();
+
+    if (/^[a-z ]+$/.test(trigger)) {
+      const escaped = trigger.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      return new RegExp(`(^|[^a-z])${escaped}($|[^a-z])`, "i")
+        .test(lower);
+    }
+
+    return lower.includes(trigger);
+  });
+}
+
+function isBotCall(text) {
+  const lower = String(text || "").toLowerCase();
+  return /(^|[^a-z])bot([^a-z]|$)/i.test(lower) ||
+    lower.includes("বট") ||
+    lower.includes("বেবি");
+}
+
+async function getApiReply(text, senderID) {
+  try {
+    const response = await axios.get(API_URL, {
+      params: {
+        text: text,
+        senderID: senderID
+      },
+      timeout: 8000,
+      validateStatus: status => status >= 200 && status < 500
+    });
+
+    if (response.status === 404) return null;
+    if (response.status < 200 || response.status >= 300) return null;
+
+    const data = response.data;
+
+    if (typeof data === "string" && data.trim()) {
+      return data.trim();
+    }
+
+    if (data && typeof data === "object") {
+      const answer =
+        data.reply ||
+        data.response ||
+        data.message ||
+        data.answer ||
+        data.data?.reply;
+
+      if (typeof answer === "string" && answer.trim()) {
+        return answer.trim();
+      }
+    }
+
+    return null;
+  } catch (error) {
+    console.log(
+      "[BABY AI] API error:",
+      error.response?.status || error.code || error.message
+    );
+    return null;
+  }
+}
+
+async function getProfilePicture(senderID) {
+  try {
+    // Graph API-এর পাবলিক ছবি চেষ্টা করা হবে।
+    // ছবি না পাওয়া গেলে কোনো ভুয়া ছবি পাঠানো হবে না।
+    const url =
+      `https://graph.facebook.com/${encodeURIComponent(senderID)}/picture` +
+      "?type=large&width=720&height=720";
+
+    const response = await axios.get(url, {
+      responseType: "arraybuffer",
+      timeout: 7000,
+      maxRedirects: 5,
+      validateStatus: status => status >= 200 && status < 400
+    });
+
+    const buffer = Buffer.from(response.data);
+
+    if (
+      buffer.length < 1000 ||
+      !String(response.headers["content-type"] || "").startsWith("image/")
+    ) {
+      return null;
+    }
+
+    const imagePath = path.join(
+      os.tmpdir(),
+      `baby-profile-${Date.now()}-${Math.random()
+        .toString(36).slice(2)}.jpg`
+    );
+
+    await fs.writeFile(imagePath, buffer);
+    return imagePath;
+  } catch (error) {
+    console.log("[BABY AI] Profile picture unavailable.");
+    return null;
+  }
+}
+
+function sendText(api, event, text) {
+  return new Promise(resolve => {
+    api.sendMessage(
+      text,
+      event.threadID,
+      () => resolve(),
+      event.messageID
+    );
+  });
+}
+
+async function sendProfile(api, event, senderID) {
+  let imagePath = null;
+
+  try {
+    imagePath = await getProfilePicture(senderID);
+
+    const caption = formatReply(
+      "🐰💗 তুমি আমাকে বট বলে ডাকছো! এই নাও, তোমার প্রোফাইল ছবি দেখানোর চেষ্টা করলাম।"
+    ) +
+      "\n\n📘 Facebook ID: " + FACEBOOK_ID +
+      "\n📱 WhatsApp: " + WHATSAPP;
+
+    if (imagePath) {
+      await new Promise(resolve => {
+        api.sendMessage(
+          {
+            body: caption,
+            attachment: fs.createReadStream(imagePath)
+          },
+          event.threadID,
+          () => resolve(),
+          event.messageID
+        );
+      });
+    } else {
+      await sendText(
+        api,
+        event,
+        caption +
+          "\n\n⚠️ প্রোফাইল ছবি পাওয়া যায়নি। Facebook-এর অনুমতি বা API সীমাবদ্ধতা থাকতে পারে।"
+      );
+    }
+  } catch (error) {
+    console.log("[BABY AI] Profile send error:", error.message);
+
+    await sendText(
+      api,
+      event,
+      formatReply("ছবিটি পাঠানো যায়নি। আবার চেষ্টা করো।")
+    );
+  } finally {
+    if (imagePath) {
+      try {
+        await fs.remove(imagePath);
+      } catch (_) {}
+    }
+  }
+}
+
+function isDisabled(threadID) {
+  try {
+    if (!fs.existsSync(OFF_FILE)) return false;
+
+    const data = fs.readJsonSync(OFF_FILE, { throws: false }) || {};
+    return data[String(threadID)] === true;
+  } catch (_) {
+    return false;
+  }
+}
+
+function setDisabled(threadID, value) {
+  let data = {};
+
+  try {
+    data = fs.readJsonSync(OFF_FILE, { throws: false }) || {};
+  } catch (_) {}
+
+  data[String(threadID)] = value;
+  fs.writeJsonSync(OFF_FILE, data, { spaces: 2 });
+}
+
+module.exports = function ({ api, event }) {
+  if (!api || !event || !event.threadID) return;
+
+  const body = String(event.body || "").trim();
+  if (!body) return;
+
+  const threadID = String(event.threadID);
+  const senderID = String(event.senderID || "");
+  const messageID = event.messageID;
+
+  // Admin command: baby on / baby off
+  const lower = body.toLowerCase();
+
+  if (/^baby\s+off$/i.test(body) || body === "বেবি অফ") {
+    setDisabled(threadID, true);
+    return sendText(
+      api,
+      event,
+      formatReply("🔕 এই গ্রুপে BABY Auto Reply বন্ধ করা হয়েছে।")
+    );
+  }
+
+  if (/^baby\s+on$/i.test(body) || body === "বেবি অন") {
+    setDisabled(threadID, false);
+    return sendText(
+      api,
+      event,
+      formatReply("🔔 এই গ্রুপে BABY Auto Reply চালু করা হয়েছে।")
+    );
+  }
+
+  if (isDisabled(threadID)) return;
+  if (!containsTrigger(body)) return;
+
+  // একই মেসেজে একাধিক event এলে দ্বিতীয়বার উত্তর দেবে না।
+  if (messageID) {
+    if (recentMessages.has(messageID)) return;
+    recentMessages.set(messageID, Date.now());
+
+    if (recentMessages.size > 500) {
+      const cutoff = Date.now() - 30000;
+
+      for (const [id, time] of recentMessages) {
+        if (time < cutoff) recentMessages.delete(id);
+      }
+    }
+  }
+
+  requestCount++;
+
+  (async () => {
+    // বট বলে ডাকলে caller-এর প্রোফাইল ছবি দেখানোর চেষ্টা করবে।
+    if (isBotCall(body) && senderID) {
+      return sendProfile(api, event, senderID);
+    }
+
+    // আগে API থেকে উত্তর; API ব্যর্থ হলে স্থানীয় রিপ্লাই।
+    const answer = await getApiReply(body, senderID);
+    const reply = answer || random(REPLIES);
+
+    return sendText(api, event, formatReply(reply));
+  })().catch(error => {
+    console.log("[BABY AI] Handler error:", error.message);
+  });
+};
+
+module.exports.config = {
+  name: "baby",
+  version: "10.0.0",
+  hasPermssion: 0,
+  credits: "💠 HRIDOY HASAN SHANTO 💠",
+  description: "Stylish Baby AI Auto Reply",
+  commandCategory: "AI",
+  usages: "baby / bot / বেবি / বট",
+  cooldowns: 2
+};
+    
