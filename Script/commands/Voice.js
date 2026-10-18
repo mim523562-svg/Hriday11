@@ -1,42 +1,21 @@
 
 /**
  * ╔══════════════════════════════════════════════╗
- * ║       🎙️ HRIDOY TEXT VOICE V9               ║
+ * ║       🎙️ HRIDOY TEXT VOICE V10              ║
  * ║       💠 HRIDOY HASAN SHANTO 💠             ║
- * ║    RANDOM VOICE + REPLY COMMENT SYSTEM       ║
+ * ║       RANDOM VOICE + ON/OFF FIX             ║
  * ╚══════════════════════════════════════════════╝
+ * System: Old Mirai
+ * Format: module.exports = function ({ api, event })
  */
 
 const axios = require("axios");
 const fs = require("fs-extra");
 const path = require("path");
 
+const CREDIT = "💠 HRIDOY HASAN SHANTO 💠";
 const CACHE_DIR = path.join(__dirname, "cache");
 const STATE_FILE = path.join(__dirname, "voiceState.json");
-
-const CREDIT = "💠 HRIDOY HASAN SHANTO 💠";
-
-// ================================================
-// 🎛️ VOICE ON/OFF
-// ================================================
-
-function isVoiceEnabled() {
-  try {
-    if (!fs.existsSync(STATE_FILE)) return true;
-    return fs.readJsonSync(STATE_FILE).enabled !== false;
-  } catch {
-    return true;
-  }
-}
-
-async function setVoiceEnabled(enabled) {
-  await fs.ensureDir(__dirname);
-  await fs.writeJson(STATE_FILE, { enabled }, { spaces: 2 });
-}
-
-// ================================================
-// 🎙️ VOICE DATABASE
-// ================================================
 
 const textAudioMap = {
   "🤖": ["https://files.catbox.moe/l0jhdq.mp3"],
@@ -102,29 +81,16 @@ const textAudioMap = {
   "👍": ["https://files.catbox.moe/mkvysb.mp3"]
 };
 
-// ================================================
-// 🛡️ DUPLICATE PROTECTION
-// ================================================
-
-const processedMessages = new Set();
-
-function alreadyProcessed(id) {
-  if (!id) return false;
-
-  const key = String(id);
-  if (processedMessages.has(key)) return true;
-
-  processedMessages.add(key);
-
-  setTimeout(() => processedMessages.delete(key), 30000);
-
-  if (processedMessages.size > 5000) {
-    const oldest = processedMessages.values().next().value;
-    processedMessages.delete(oldest);
-  }
-
-  return false;
-}
+module.exports.config = {
+  name: "text_voice",
+  version: "10.0.0",
+  hasPermssion: 0,
+  credits: CREDIT,
+  description: "Random audio reply with persistent ON/OFF",
+  commandCategory: "noprefix",
+  usages: ".voice on/off/status",
+  cooldowns: 1
+};
 
 function normalize(value) {
   return String(value || "")
@@ -134,229 +100,179 @@ function normalize(value) {
     .toLowerCase();
 }
 
-function getRandomVoice(key) {
-  const list = textAudioMap[key];
-  if (!Array.isArray(list) || !list.length) return null;
-
-  return list[Math.floor(Math.random() * list.length)];
+function getState() {
+  try {
+    if (!fs.existsSync(STATE_FILE)) return true;
+    return fs.readJsonSync(STATE_FILE).enabled !== false;
+  } catch (error) {
+    console.error("[VOICE STATE]", error.message);
+    return true;
+  }
 }
 
-// ================================================
-// 📋 HELP MENU
-// ================================================
+async function setState(enabled) {
+  await fs.ensureDir(path.dirname(STATE_FILE));
+  await fs.writeJson(
+    STATE_FILE,
+    { enabled: Boolean(enabled) },
+    { spaces: 2 }
+  );
+}
 
-const voiceList = `
-╔══════════════════════════════╗
-     🎙️ HRIDOY TEXT VOICE V9
-╚══════════════════════════════╝
-
-🎛️ VOICE CONTROL
-🟢 .voice on
-🔴 .voice off
-📊 .voice status
-
-💬 COMMENT / REPLY VOICE
-যেকোনো ট্রিগার মেসেজে ভয়েস রিপ্লাই
-🎙️ বট অডিওসহ রিপ্লাই পাঠাবে
-
-🎙️ TEXT TRIGGERS
-🤖 🥱 🤏 🤦‍♂️ 🫠 🤨
-ভয়েস | এহ | ডিলেট
-mata beta | সর বাল | কেউ নাই
-good night | গুড নাইট
-good morning | গুড মর্নিং
-i love you | love you
-@everyone | ভুদা
-by | বাই | বায়
-dirim | চুদি
-
-😄 EMOJI VOICE
-☺️ 😊 🌚 🌝 🐸 👀 🖕
-😁 🤣 😆 😑 😅 😍 😒
-💋 😘 😡 🤬 😩 😭 🙂
-🙏 😂 🤭 🥰 🥵 🥺
-🥹 🫶 🫣 🍼 👍
-
-💠 ADMIN: HRIDOY HASAN SHANTO
-🛡️ ONE MESSAGE = ONE PROCESS
-`;
-
-// ================================================
-// ⚙️ MODULE CONFIG
-// ================================================
-
-module.exports.config = {
-  name: "text_voice",
-  version: "9.0.0",
-  hasPermssion: 0,
-  credits: CREDIT,
-  description: "Random voice with comment reply system",
-  commandCategory: "noprefix",
-  usages: ".voice on/off/status",
-  cooldowns: 2
-};
-
-// ================================================
-// 💬 SEND AUDIO REPLY — OLD MIRAI API
-// ================================================
-
-function sendAudioReply(api, event, filePath) {
+function sendMessage(api, body, event) {
   return new Promise((resolve, reject) => {
-    let finished = false;
-
-    const done = (error, info) => {
-      if (finished) return;
-      finished = true;
-      if (error) return reject(error);
+    api.sendMessage(body, event.threadID, (err, info) => {
+      if (err) return reject(err);
       resolve(info);
-    };
-
-    try {
-      api.sendMessage(
-        {
-          body: `🎙️ HRIDOY TEXT VOICE V9\n${CREDIT}`,
-          attachment: fs.createReadStream(filePath)
-        },
-        event.threadID,
-        done,
-        event.messageID
-      );
-    } catch (error) {
-      done(error);
-    }
+    }, event.messageID);
   });
 }
 
-// ================================================
-// 🎙️ CORE HANDLER
-// ================================================
+async function sendAudio(api, event, filePath) {
+  return new Promise((resolve, reject) => {
+    api.sendMessage({
+      body: `🎙️ HRIDOY TEXT VOICE V10\n${CREDIT}`,
+      attachment: fs.createReadStream(filePath)
+    }, event.threadID, (err, info) => {
+      if (err) return reject(err);
+      resolve(info);
+    }, event.messageID);
+  });
+}
 
-async function processVoice(api, event) {
+const processed = new Set();
+
+function claimMessage(id) {
+  if (!id) return true;
+  const key = String(id);
+  if (processed.has(key)) return false;
+
+  processed.add(key);
+
+  // Prevent unlimited memory growth.
+  if (processed.size > 3000) {
+    const first = processed.values().next().value;
+    processed.delete(first);
+  }
+
+  return true;
+}
+
+async function handle({ api, event }) {
   if (!api || !event || !event.threadID) return;
 
-  const key = normalize(event.body);
-  const threadID = event.threadID;
-  const messageID = event.messageID;
+  const body = normalize(event.body);
+  if (!body) return;
 
-  if (!key) return;
+  // Prevent duplicate execution across old Mirai event hooks.
+  if (!claimMessage(event.messageID)) return;
 
-  // Voice controls
-  if (/^\.voice\s+(on|off|status)$/.test(key)) {
-    const action = key.split(/\s+/)[1];
+  // ON/OFF/STATUS commands must work even when voice is OFF.
+  const match = body.match(/^[.!/]voice\s+(on|off|status)$/);
+
+  if (match) {
+    const action = match[1];
 
     try {
-      if (action === "on") await setVoiceEnabled(true);
-      if (action === "off") await setVoiceEnabled(false);
+      if (action === "on") await setState(true);
+      if (action === "off") await setState(false);
 
-      const enabled = isVoiceEnabled();
+      const enabled = getState();
 
       const reply = action === "status"
-        ? `📊 Voice Status: ${enabled ? "🟢 ON" : "🔴 OFF"}\n${CREDIT}`
-        : `${enabled ? "🟢 ভয়েস চালু করা হয়েছে!" : "🔴 ভয়েস বন্ধ করা হয়েছে!"}\n${CREDIT}`;
+        ? `🎙️ HRIDOY TEXT VOICE V10\n📊 Status: ${enabled ? "🟢 ON" : "🔴 OFF"}\n${CREDIT}`
+        : `${enabled ? "🟢 Voice চালু হয়েছে!" : "🔴 Voice বন্ধ হয়েছে!"}\n${CREDIT}`;
 
-      return api.sendMessage(reply, threadID, messageID);
+      await sendMessage(api, reply, event);
     } catch (error) {
       console.error("[VOICE CONTROL]", error.message);
-      return api.sendMessage(
-        "❌ Voice setting save করা যায়নি।",
-        threadID,
-        messageID
-      );
+      await sendMessage(
+        api,
+        `❌ Voice setting save করা যায়নি!\n${CREDIT}`,
+        event
+      ).catch(() => {});
     }
+
+    return;
   }
 
-  // Help
+  // Voice list.
   if ([
-    "voice list", "voicelist", "text voice", "textvoice",
-    "ভয়েস লিস্ট", "ভয়েস লিস্ট", "ভয়েস লিস্ট দাও",
-    "🎤", "command list"
-  ].includes(key)) {
-    if (alreadyProcessed(messageID)) return;
-    return api.sendMessage(voiceList, threadID, messageID);
+    "voice list",
+    "voicelist",
+    "text voice",
+    "textvoice",
+    "ভয়েস লিস্ট",
+    "ভয়েস লিস্ট",
+    "🎤"
+  ].includes(body)) {
+    const list = Object.keys(textAudioMap).join("  ");
+
+    return sendMessage(
+      api,
+      `🎙️ HRIDOY TEXT VOICE V10\n\n${list}\n\n.voice on\n.voice off\n.voice status\n\n${CREDIT}`,
+      event
+    ).catch(error => console.error("[VOICE LIST]", error.message));
   }
 
-  if (!isVoiceEnabled()) return;
-  if (alreadyProcessed(messageID)) return;
+  if (!getState()) return;
 
-  const audioUrl = getRandomVoice(key);
-  if (!audioUrl) return;
+  const urls = textAudioMap[body];
+  if (!urls || !urls.length) return;
 
   let filePath;
 
   try {
     await fs.ensureDir(CACHE_DIR);
 
-    const extension = /\.mp4(?:$|\?)/i.test(audioUrl)
-      ? ".mp4"
-      : ".mp3";
-
-    const safeID = String(messageID || Date.now())
+    const url = urls[Math.floor(Math.random() * urls.length)];
+    const extension = /\.mp4(?:\?|$)/i.test(url) ? ".mp4" : ".mp3";
+    const safeId = String(event.messageID || Date.now())
       .replace(/[^a-zA-Z0-9_-]/g, "");
 
     filePath = path.join(
       CACHE_DIR,
-      `voice_${safeID}_${Date.now()}${extension}`
+      `voice_${safeId}_${Date.now()}${extension}`
     );
 
-    const response = await axios.get(audioUrl, {
+    const response = await axios.get(url, {
       responseType: "stream",
       timeout: 30000,
-      maxRedirects: 5,
-      validateStatus: status => status >= 200 && status < 300
+      maxRedirects: 5
     });
 
     await new Promise((resolve, reject) => {
       const writer = fs.createWriteStream(filePath);
-
       response.data.on("error", reject);
       writer.on("error", reject);
       writer.on("finish", resolve);
-
       response.data.pipe(writer);
     });
 
-    // Reply to the original message
-    await sendAudioReply(api, event, filePath);
-
+    await sendAudio(api, event, filePath);
   } catch (error) {
-    console.error("[TEXT_VOICE ERROR]", error.message);
-
-    // Do not spam the group with error messages.
+    console.error("[TEXT VOICE ERROR]", error.message);
   } finally {
     if (filePath) {
       setTimeout(() => {
         fs.remove(filePath).catch(() => {});
-      }, 5000);
+      }, 10000);
     }
   }
 }
 
-// ================================================
-// 🐐 GOATBOT HANDLERS
-// ================================================
-
-module.exports.onStart = async function ({ api, event }) {
-  return processVoice(api, event);
+// Old Mirai event format.
+module.exports = async function ({ api, event }) {
+  return handle({ api, event });
 };
 
-module.exports.onChat = async function ({ api, event }) {
-  return processVoice(api, event);
-};
-
-module.exports.handleEvent = async function ({ api, event }) {
-  return processVoice(api, event);
-};
-
-// ================================================
-// 🤖 OLD MIRAI COMPATIBILITY
-// ================================================
-
+// Command compatibility.
 module.exports.run = async function ({ api, event, args }) {
-  if (!event) return;
+  const body = event.body ||
+    `.voice ${(Array.isArray(args) ? args : []).join(" ")}`;
 
-  // Supports .voice on/off/status through command handler
-  return processVoice(api, {
-    ...event,
-    body: event.body || (Array.isArray(args) ? args.join(" ") : "")
+  return handle({
+    api,
+    event: { ...event, body }
   });
 };
