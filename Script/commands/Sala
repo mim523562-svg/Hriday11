@@ -1,156 +1,261 @@
+
+/**
+ * ╔══════════════════════════════════════════════╗
+ * ║             💠 SALA BANNER V2 💠             ║
+ * ║       Random Caption + Avatar Banner         ║
+ * ║          💠 HRIDOY HASAN SHANTO 💠            ║
+ * ╚══════════════════════════════════════════════╝
+ * System: Mirai Legacy
+ * Path: scripts/commands/sala.js
+ */
+
+const axios = require("axios");
+const fs = require("fs-extra");
+const path = require("path");
+const { createCanvas, loadImage } = require("canvas");
+
 module.exports.config = {
   name: "sala",
-  version: "1.0.0",
+  version: "2.0.0",
   hasPermssion: 0,
-  credits: "乛 M𝆠፝֟R ཐི༏ཋྀ JU𝆠፝֟W𝆠፝֟ELꜛཐི༏ཋྀ࿐",
-  description: "Sala banner with random caption",
+  credits: "HRIDOY HASAN SHANTO",
+  description: "SALA banner with random Bangla caption",
   commandCategory: "banner",
   usePrefix: true,
-  usages: "[@mention | reply]",
+  usages: "sala @mention | reply",
   cooldowns: 40,
   dependencies: {
-    "axios": "",
+    axios: "",
     "fs-extra": "",
-    "path": "",
-    "canvas": ""
+    canvas: ""
   }
 };
 
-// ====== Template settings ======
+// ================= SETTINGS =================
+
 const TEMPLATE_URL = "https://i.imgur.com/vxfoQt2.jpeg";
+
 const REF_W = 1536;
 const REF_H = 1024;
-// বাম লোগো = যাকে মেনশন/রিপ্লাই করা হবে
-// ডান লোগো = যে কমান্ড দিবে
-// ছবি ঠিকমতো না বসলে শুধু এই x, y, rx, ry মান বদলাও
-// x, y = গোল ফ্রেমের মাঝখান | rx = আড়াআড়ি রেডিয়াস | ry = লম্বালম্বি রেডিয়াস
-const LEFT  = { x: 265,  y: 359, rx: 133, ry: 130 };
+
+// বাম পাশে টার্গেট, ডান পাশে কমান্ডদাতা
+const LEFT = { x: 265, y: 359, rx: 133, ry: 130 };
 const RIGHT = { x: 1352, y: 361, rx: 125, ry: 127 };
 
-// র‍্যান্ডমভাবে একটি ক্যাপশন যাবে
 const TEXTS = [
-  "সালা 😂 তোর ল্যাংটা কালের বন্ধুকে বিয়ে করলি! 💍🤣\nছোটবেলার গোপন কাহিনি এখন বউয়ের কাছে ফাঁস হবে! 🤭🔥",
-  "সালা 😂 ছোটবেলার বন্ধু আজ বিয়ে করে পুরাই বউয়ের গোলাম! 🤣💍\nআগে একসাথে দুষ্টুমি করতি, এখন বউয়ের ভয়ে চুপচাপ থাকিস! 🤣🙈",
-  "সালা 😂 ল্যাংটা কালের বন্ধুর বিয়ে দেখে অবাক! 🤣💍\nযে বন্ধু একসময় কাপড় নিয়ে দৌড়াত, আজ সে বউ নিয়ে ঘুরে! 😆❤️",
-  "সালা 🤣 তোর বিয়েতে পুরোনো দিনের কথা মনে পড়ে! 😂\nবউ যদি ছোটবেলার কাহিনি জানে, তোর খবর আছে রে ভাই! 🤣🤫",
-  "সালা 😜 বন্ধুত্ব থেকে জামাই-বন্ধু, কী দারুণ কাহিনি! 💍😂\nল্যাংটা কালের বন্ধু আজ বিয়ে করে, আর আমরা হাসতে হাসতে শেষ! 🤣🔥"
+  "সালা 😂 তোর ছোটবেলার বন্ধুর বিয়ে হয়ে গেল! 💍🤣\nপুরোনো কাহিনি এবার বউয়ের কাছে ফাঁস হবে! 🤭🔥",
+  "সালা 😂 ছোটবেলার বন্ধু আজ বিয়ে করে পুরাই বউয়ের গোলাম! 🤣💍\nআগের দুষ্টুমি ভুলে এখন বউয়ের ভয়ে চুপচাপ! 🙈",
+  "সালা 🤣 বন্ধুর বিয়ে দেখে পুরোনো দিনের কথা মনে পড়ে! 💍😂\nএবার তোর সব গোপন কাহিনি ফাঁস হবে! 🤫🔥",
+  "সালা 😜 বন্ধুত্ব থেকে জামাই-বন্ধু! 😂💍\nআমরা আড্ডা দিই, আর তুই বউ নিয়ে ব্যস্ত! 🤣❤️",
+  "সালা 😂 বন্ধুর বিয়েতে আনন্দের শেষ নেই! 💍🥳\nছোটবেলার দুষ্টুমির গল্প কিন্তু এখনো বাকি! 🤭🤣"
 ];
-// ================================
 
-module.exports.run = async function ({ event, api }) {
-  const axios = require("axios");
-  const fs = require("fs-extra");
-  const path = require("path");
-  const { createCanvas, loadImage } = require("canvas");
+const CACHE_DIR = path.join(__dirname, "cache");
+const TEMPLATE_PATH = path.join(CACHE_DIR, "sala_template.jpg");
 
-  const { threadID, messageID, senderID, mentions, messageReply } = event;
+// ================= HELPERS =================
 
-  let targetID = null;
-  if (mentions && Object.keys(mentions).length > 0) {
-    targetID = Object.keys(mentions)[0];
-  } else if (messageReply && messageReply.senderID) {
-    targetID = messageReply.senderID;
+async function downloadImage(url, timeout = 25000) {
+  const response = await axios.get(url, {
+    responseType: "arraybuffer",
+    timeout,
+    maxRedirects: 5,
+    headers: {
+      "User-Agent": "Mozilla/5.0"
+    }
+  });
+
+  const buffer = Buffer.from(response.data);
+
+  if (!buffer.length) {
+    throw new Error("ছবির ডেটা খালি এসেছে");
   }
+
+  return buffer;
+}
+
+async function getTemplate() {
+  // পুরোনো ক্যাশ নষ্ট হলে মুছে আবার ডাউনলোড
+  if (await fs.pathExists(TEMPLATE_PATH)) {
+    try {
+      return await loadImage(TEMPLATE_PATH);
+    } catch {
+      await fs.remove(TEMPLATE_PATH);
+    }
+  }
+
+  const buffer = await downloadImage(TEMPLATE_URL);
+  const image = await loadImage(buffer);
+
+  await fs.writeFile(TEMPLATE_PATH, buffer);
+  return image;
+}
+
+async function getAvatar(uid) {
+  // কোনো embedded access token ব্যবহার করা হচ্ছে না
+  const url =
+    `https://graph.facebook.com/${encodeURIComponent(uid)}/picture` +
+    "?width=720&height=720";
+
+  const buffer = await downloadImage(url);
+  return await loadImage(buffer);
+}
+
+function drawAvatar(ctx, image, frame, sx, sy) {
+  const cx = frame.x * sx;
+  const cy = frame.y * sy;
+  const rx = frame.rx * sx;
+  const ry = frame.ry * sy;
+
+  const width = rx * 2;
+  const height = ry * 2;
+
+  // ছবি বিকৃত না করে মাঝখান থেকে crop
+  const scale = Math.max(
+    width / image.width,
+    height / image.height
+  );
+
+  const drawWidth = image.width * scale;
+  const drawHeight = image.height * scale;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+  ctx.clip();
+
+  ctx.drawImage(
+    image,
+    cx - drawWidth / 2,
+    cy - drawHeight / 2,
+    drawWidth,
+    drawHeight
+  );
+
+  ctx.restore();
+}
+
+function getTargetID(event) {
+  const mentions = event.mentions || {};
+  const mentionIDs = Object.keys(mentions);
+
+  if (mentionIDs.length > 0) {
+    return mentionIDs[0];
+  }
+
+  if (event.messageReply && event.messageReply.senderID) {
+    return event.messageReply.senderID;
+  }
+
+  return null;
+}
+
+// ================= MAIN COMMAND =================
+
+module.exports.run = async function ({ api, event }) {
+  const { threadID, messageID, senderID } = event;
+  const targetID = getTargetID(event);
 
   if (!targetID) {
     return api.sendMessage(
-      "⚠️ কাউকে মেনশন করো বা রিপ্লাই দাও!\n\nউদাহরণ: sala @নাম",
+      "⚠️ আগে কাউকে মেনশন করো অথবা তার মেসেজে রিপ্লাই দাও!\n\n" +
+      "উদাহরণ: sala @নাম\n" +
+      "অথবা কারও মেসেজে রিপ্লাই দিয়ে sala লেখো।",
       threadID,
       messageID
     );
   }
 
-  const cacheDir = path.join(__dirname, "cache");
-  fs.ensureDirSync(cacheDir);
-  const imgPath = path.join(cacheDir, `sala_${senderID}_${targetID}.png`);
-  const templatePath = path.join(cacheDir, "sala_template.jpg");
+  if (String(targetID) === String(senderID)) {
+    // নিজের ছবিও ব্যবহার করা যাবে
+  }
 
-  const getTemplate = async () => {
-    if (!fs.existsSync(templatePath)) {
-      try {
-        const res = await axios.get(TEMPLATE_URL, {
-          responseType: "arraybuffer",
-          timeout: 30000,
-          headers: {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
-            "Referer": "https://imgur.com/"
-          }
-        });
-        fs.writeFileSync(templatePath, Buffer.from(res.data));
-      } catch (err) {
-        throw new Error("TEMPLATE download failed: " + (err.response?.status || err.message));
-      }
-    }
-    return loadImage(templatePath);
-  };
-
-  const getAvatar = async (uid) => {
-    const url = `https://graph.facebook.com/${uid}/picture?width=720&height=720&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
-    try {
-      const res = await axios.get(url, { responseType: "arraybuffer", timeout: 20000 });
-      return loadImage(Buffer.from(res.data));
-    } catch (err) {
-      throw new Error("AVATAR download failed: " + (err.response?.status || err.message));
-    }
-  };
+  let outputPath;
 
   try {
-    // avatar1 = কমান্ড দাতা, avatar2 = মেনশন/রিপ্লাই করা ইউজার
-    const [template, avatar1, avatar2] = await Promise.all([
-      getTemplate(),
-      getAvatar(senderID),
-      getAvatar(targetID)
-    ]);
+    await fs.ensureDir(CACHE_DIR);
 
-    const W = template.width;
-    const H = template.height;
-    const sx = W / REF_W;
-    const sy = H / REF_H;
+    // প্রতিবার আলাদা ফাইল, যাতে একই সময়ে একাধিক কমান্ডে সংঘর্ষ না হয়
+    outputPath = path.join(
+      CACHE_DIR,
+      `sala_${Date.now()}_${Math.random()
+        .toString(36).slice(2, 9)}.png`
+    );
 
-    const canvas = createCanvas(W, H);
+    // সব ছবি একসঙ্গে লোড
+    const [template, targetAvatar, senderAvatar] =
+      await Promise.all([
+        getTemplate(),
+        getAvatar(targetID),
+        getAvatar(senderID)
+      ]);
+
+    const width = template.width;
+    const height = template.height;
+
+    const sx = width / REF_W;
+    const sy = height / REF_H;
+
+    const canvas = createCanvas(width, height);
     const ctx = canvas.getContext("2d");
-    ctx.drawImage(template, 0, 0, W, H);
 
-    const drawAvatar = (img, c) => {
-      const cx = c.x * sx;
-      const cy = c.y * sy;
-      const rx = c.rx * sx;
-      const ry = c.ry * sy;
-      const w = rx * 2;
-      const h = ry * 2;
-      // ছবি বিকৃত না করে ফ্রেম ভরাতে সেন্টার-ক্রপ
-      const scale = Math.max(w / img.width, h / img.height);
-      const dw = img.width * scale;
-      const dh = img.height * scale;
-      ctx.save();
-      ctx.beginPath();
-      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
-      ctx.closePath();
-      ctx.clip();
-      ctx.drawImage(img, cx - dw / 2, cy - dh / 2, dw, dh);
-      ctx.restore();
-    };
+    // Template background
+    ctx.drawImage(template, 0, 0, width, height);
 
-    drawAvatar(avatar2, LEFT);   // মেনশন/রিপ্লাই করা ইউজার → বামে
-    drawAvatar(avatar1, RIGHT);  // কমান্ড দাতা → ডানে
+    // বামে মেনশন/রিপ্লাই করা ব্যক্তি
+    drawAvatar(ctx, targetAvatar, LEFT, sx, sy);
 
-    fs.writeFileSync(imgPath, canvas.toBuffer("image/png"));
+    // ডানে কমান্ডদাতা
+    drawAvatar(ctx, senderAvatar, RIGHT, sx, sy);
 
-    const text = TEXTS[Math.floor(Math.random() * TEXTS.length)];
+    await fs.writeFile(outputPath, canvas.toBuffer("image/png"));
+
+    const caption =
+      TEXTS[Math.floor(Math.random() * TEXTS.length)];
 
     return api.sendMessage(
       {
-        body: text,
-        attachment: fs.createReadStream(imgPath)
+        body: caption,
+        attachment: fs.createReadStream(outputPath)
       },
       threadID,
-      () => fs.unlink(imgPath, () => {}),
+      (err) => {
+        if (err) {
+          console.error("[SALA] Send error:", err);
+        }
+
+        // পাঠানো শেষ হলে অস্থায়ী ফাইল পরিষ্কার
+        fs.remove(outputPath).catch(() => {});
+      },
       messageID
     );
-  } catch (e) {
-    console.log("SALA CMD ERROR:", e.response?.status, e.message);
+  } catch (error) {
+    console.error(
+      "[SALA V2 ERROR]",
+      error.response?.status || "",
+      error.message
+    );
+
+    if (outputPath) {
+      await fs.remove(outputPath).catch(() => {});
+    }
+
+    let reason = "ব্যানার তৈরি করা যায়নি।";
+
+    if (error.code === "MODULE_NOT_FOUND") {
+      reason =
+        "প্রয়োজনীয় মডিউল পাওয়া যায়নি। canvas, axios ও fs-extra ইনস্টল করো।";
+    } else if (
+      error.response ||
+      /image|decode|unsupported|format/i.test(error.message)
+    ) {
+      reason =
+        "Template বা Avatar লোড হয়নি। ছবির URL এবং সার্ভারের নেটওয়ার্ক পরীক্ষা করো।";
+    }
+
     return api.sendMessage(
-      "Error: " + (e.response?.status || e.message),
+      `❌ SALA ERROR\n\n${reason}\n\n` +
+      `বিস্তারিত: ${error.message}`,
       threadID,
       messageID
     );
