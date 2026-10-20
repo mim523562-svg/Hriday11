@@ -1,12 +1,9 @@
-
 /**
  * ╔══════════════════════════════════════════════╗
- * ║       🎙️ HRIDOY TEXT VOICE V10              ║
+ * ║       🎙️ HRIDOY TEXT VOICE V11              ║
  * ║       💠 HRIDOY HASAN SHANTO 💠             ║
- * ║       RANDOM VOICE + ON/OFF FIX             ║
+ * ║       OLD MIRAI COMPATIBILITY                ║
  * ╚══════════════════════════════════════════════╝
- * System: Old Mirai
- * Format: module.exports = function ({ api, event })
  */
 
 const axios = require("axios");
@@ -17,7 +14,7 @@ const CREDIT = "💠 HRIDOY HASAN SHANTO 💠";
 const CACHE_DIR = path.join(__dirname, "cache");
 const STATE_FILE = path.join(__dirname, "voiceState.json");
 
-const textAudioMap = {
+const AUDIO = {
   "🤖": ["https://files.catbox.moe/l0jhdq.mp3"],
   "🥱": [
     "https://files.catbox.moe/mofu8n.mp3",
@@ -83,12 +80,12 @@ const textAudioMap = {
 
 module.exports.config = {
   name: "text_voice",
-  version: "10.0.0",
+  version: "11.0.0",
   hasPermssion: 0,
   credits: CREDIT,
-  description: "Random audio reply with persistent ON/OFF",
-  commandCategory: "noprefix",
-  usages: ".voice on/off/status",
+  description: "Automatic audio reply and voice controls",
+  commandCategory: "utility",
+  usages: ".voice on/off/status/list",
   cooldowns: 1
 };
 
@@ -103,60 +100,57 @@ function normalize(value) {
 function getState() {
   try {
     if (!fs.existsSync(STATE_FILE)) return true;
-    return fs.readJsonSync(STATE_FILE).enabled !== false;
+
+    const state = fs.readJsonSync(STATE_FILE);
+    return state.enabled !== false;
   } catch (error) {
-    console.error("[VOICE STATE]", error.message);
+    console.error("[HRIDOY VOICE STATE]", error.message);
     return true;
   }
 }
 
 async function setState(enabled) {
   await fs.ensureDir(path.dirname(STATE_FILE));
-  await fs.writeJson(
-    STATE_FILE,
-    { enabled: Boolean(enabled) },
-    { spaces: 2 }
+
+  const tempFile = STATE_FILE + ".tmp";
+  await fs.writeJson(tempFile, { enabled }, { spaces: 2 });
+  await fs.move(tempFile, STATE_FILE, { overwrite: true });
+}
+
+function sendText(api, event, body) {
+  return new Promise((resolve, reject) => {
+    api.sendMessage(
+      body,
+      event.threadID,
+      (error, info) => error ? reject(error) : resolve(info),
+      event.messageID
+    );
+  });
+}
+
+function findAudio(body) {
+  const key = Object.keys(AUDIO).find(
+    item => normalize(item) === body
   );
+
+  return key ? AUDIO[key] : null;
 }
 
-function sendMessage(api, body, event) {
+async function sendVoice(api, event, filePath) {
   return new Promise((resolve, reject) => {
-    api.sendMessage(body, event.threadID, (err, info) => {
-      if (err) return reject(err);
-      resolve(info);
-    }, event.messageID);
+    api.sendMessage(
+      {
+        body: `🎙️ HRIDOY TEXT VOICE V11\n${CREDIT}`,
+        attachment: fs.createReadStream(filePath)
+      },
+      event.threadID,
+      (error, info) => error ? reject(error) : resolve(info),
+      event.messageID
+    );
   });
 }
 
-async function sendAudio(api, event, filePath) {
-  return new Promise((resolve, reject) => {
-    api.sendMessage({
-      body: `🎙️ HRIDOY TEXT VOICE V10\n${CREDIT}`,
-      attachment: fs.createReadStream(filePath)
-    }, event.threadID, (err, info) => {
-      if (err) return reject(err);
-      resolve(info);
-    }, event.messageID);
-  });
-}
-
-const processed = new Set();
-
-function claimMessage(id) {
-  if (!id) return true;
-  const key = String(id);
-  if (processed.has(key)) return false;
-
-  processed.add(key);
-
-  // Prevent unlimited memory growth.
-  if (processed.size > 3000) {
-    const first = processed.values().next().value;
-    processed.delete(first);
-  }
-
-  return true;
-}
+const processing = new Set();
 
 async function handle({ api, event }) {
   if (!api || !event || !event.threadID) return;
@@ -164,115 +158,115 @@ async function handle({ api, event }) {
   const body = normalize(event.body);
   if (!body) return;
 
-  // Prevent duplicate execution across old Mirai event hooks.
-  if (!claimMessage(event.messageID)) return;
+  const messageID = event.messageID
+    ? String(event.messageID)
+    : null;
 
-  // ON/OFF/STATUS commands must work even when voice is OFF.
-  const match = body.match(/^[.!/]voice\s+(on|off|status)$/);
+  if (messageID && processing.has(messageID)) return;
 
-  if (match) {
-    const action = match[1];
-
-    try {
-      if (action === "on") await setState(true);
-      if (action === "off") await setState(false);
-
-      const enabled = getState();
-
-      const reply = action === "status"
-        ? `🎙️ HRIDOY TEXT VOICE V10\n📊 Status: ${enabled ? "🟢 ON" : "🔴 OFF"}\n${CREDIT}`
-        : `${enabled ? "🟢 Voice চালু হয়েছে!" : "🔴 Voice বন্ধ হয়েছে!"}\n${CREDIT}`;
-
-      await sendMessage(api, reply, event);
-    } catch (error) {
-      console.error("[VOICE CONTROL]", error.message);
-      await sendMessage(
-        api,
-        `❌ Voice setting save করা যায়নি!\n${CREDIT}`,
-        event
-      ).catch(() => {});
-    }
-
-    return;
-  }
-
-  // Voice list.
-  if ([
-    "voice list",
-    "voicelist",
-    "text voice",
-    "textvoice",
-    "ভয়েস লিস্ট",
-    "ভয়েস লিস্ট",
-    "🎤"
-  ].includes(body)) {
-    const list = Object.keys(textAudioMap).join("  ");
-
-    return sendMessage(
-      api,
-      `🎙️ HRIDOY TEXT VOICE V10\n\n${list}\n\n.voice on\n.voice off\n.voice status\n\n${CREDIT}`,
-      event
-    ).catch(error => console.error("[VOICE LIST]", error.message));
-  }
-
-  if (!getState()) return;
-
-  const urls = textAudioMap[body];
-  if (!urls || !urls.length) return;
-
-  let filePath;
+  if (messageID) processing.add(messageID);
 
   try {
+    // ON / OFF / STATUS / LIST
+    const match = body.match(/^[.!/]voice(?:\s+(on|off|status|list))?$/);
+
+    if (match) {
+      const action = match[1] || "status";
+
+      if (action === "on") {
+        await setState(true);
+        return await sendText(
+          api, event,
+          `🟢 TEXT VOICE চালু হয়েছে!\n🎙️ এখন অডিও রিপ্লাই চলবে।\n${CREDIT}`
+        );
+      }
+
+      if (action === "off") {
+        await setState(false);
+        return await sendText(
+          api, event,
+          `🔴 TEXT VOICE বন্ধ হয়েছে!\n🎙️ অটো অডিও রিপ্লাই বন্ধ।\n${CREDIT}`
+        );
+      }
+
+      if (action === "status") {
+        return await sendText(
+          api, event,
+          `🎙️ HRIDOY TEXT VOICE V11\n` +
+          `📊 Status: ${getState() ? "🟢 ON" : "🔴 OFF"}\n\n` +
+          `.voice on\n.voice off\n.voice status\n.voice list\n\n${CREDIT}`
+        );
+      }
+
+      if (action === "list") {
+        return await sendText(
+          api, event,
+          `🎙️ TEXT VOICE LIST\n\n${Object.keys(AUDIO).join("  ")}\n\n${CREDIT}`
+        );
+      }
+    }
+
+    // List shortcuts
+    if ([
+      "voice list", "voicelist", "text voice",
+      "textvoice", "ভয়েস লিস্ট", "ভয়েস লিস্ট", "🎤"
+    ].includes(body)) {
+      return await sendText(
+        api, event,
+        `🎙️ TEXT VOICE LIST\n\n${Object.keys(AUDIO).join("  ")}\n\n${CREDIT}`
+      );
+    }
+
+    if (!getState()) return;
+
+    const urls = findAudio(body);
+    if (!urls || !urls.length) return;
+
     await fs.ensureDir(CACHE_DIR);
 
     const url = urls[Math.floor(Math.random() * urls.length)];
     const extension = /\.mp4(?:\?|$)/i.test(url) ? ".mp4" : ".mp3";
-    const safeId = String(event.messageID || Date.now())
-      .replace(/[^a-zA-Z0-9_-]/g, "");
-
-    filePath = path.join(
+    const filePath = path.join(
       CACHE_DIR,
-      `voice_${safeId}_${Date.now()}${extension}`
+      `voice_${Date.now()}_${Math.random().toString(36).slice(2)}${extension}`
     );
 
-    const response = await axios.get(url, {
-      responseType: "stream",
-      timeout: 30000,
-      maxRedirects: 5
-    });
+    try {
+      const response = await axios.get(url, {
+        responseType: "arraybuffer",
+        timeout: 30000,
+        maxRedirects: 5,
+        validateStatus: status => status >= 200 && status < 300
+      });
 
-    await new Promise((resolve, reject) => {
-      const writer = fs.createWriteStream(filePath);
-      response.data.on("error", reject);
-      writer.on("error", reject);
-      writer.on("finish", resolve);
-      response.data.pipe(writer);
-    });
+      if (!response.data || response.data.length < 100) {
+        throw new Error("Audio file is empty or invalid");
+      }
 
-    await sendAudio(api, event, filePath);
-  } catch (error) {
-    console.error("[TEXT VOICE ERROR]", error.message);
-  } finally {
-    if (filePath) {
-      setTimeout(() => {
-        fs.remove(filePath).catch(() => {});
-      }, 10000);
+      await fs.writeFile(filePath, response.data);
+      await sendVoice(api, event, filePath);
+    } finally {
+      await fs.remove(filePath).catch(() => {});
     }
+  } catch (error) {
+    console.error("[HRIDOY TEXT VOICE V11]", error.stack || error.message);
+  } finally {
+    if (messageID) processing.delete(messageID);
   }
 }
 
-// Old Mirai event format.
+// Old Mirai event compatibility
 module.exports = async function ({ api, event }) {
   return handle({ api, event });
 };
 
-// Command compatibility.
+// Command compatibility
 module.exports.run = async function ({ api, event, args }) {
-  const body = event.body ||
+  const commandText = event.body ||
     `.voice ${(Array.isArray(args) ? args : []).join(" ")}`;
 
   return handle({
     api,
-    event: { ...event, body }
+    event: { ...event, body: commandText }
   });
 };
